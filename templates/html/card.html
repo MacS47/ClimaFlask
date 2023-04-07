@@ -1,0 +1,47 @@
+{% extends './html/index.html' %}{% block content %}
+<div class="main card center-text" id="main">
+    <div class="line-text city">
+        <h3>{{city}}</h3>
+    </div>
+    <div class="temperature ">
+        <p class="temperature-value"><a class="temp">{{temp}}</a>°</p>
+        <div class="temperature-metrics">
+            <p class="current-temperature-metrics">C</p>
+            <p><button class="toggle-temperature-metrics" id="toggle-metrics" type="reset" title="Alterar unidade de medidas" onclick="toFahrenheit();">F</button></p>
+        </div>
+    </div>
+    <div class="line-text weather-description">
+        <h3>{{description}}</h3>
+    </div>
+    <div class="line-text updated-timestamp">
+        <p>Atualizado à(s) {{current_time}}</p>
+    </div>
+    <div class="table weather-statistics">
+        <table class="">
+            <tr class="">
+                <td class="">Temp. Máxima <a class="temp">{{temp_max}}</a>°</td>
+                <td class="">Temp. Mínima <a class="temp">{{temp_min}}</a>°</td>
+            </tr>
+            <tr class="">
+                <td class="">Sensação térmica <a class="temp">{{feels_like}}</a>°</td>
+                <td class="">Umidade {{humidity}}%</td>
+            </tr>
+            <tr class="">
+                <td class="">Vento {{speed}} Km/h</td>
+                <td class="">Direção </td>
+            </tr>
+            <tr class="">
+                <td class="" title="">Visibilidade {{visibility}} Km</td>
+                <td class="" title="">Barômetro {{pressure}} hPa</td>
+            </tr>
+            <tr>
+                <td class="">Nascer do Sol {{sunrise}}</td>
+                <td class="">Por do Sol {{sunset}}</td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+
+<script src="{{url_for('static', filename = './js/index.js')}}"></script>
+{% endblock %}

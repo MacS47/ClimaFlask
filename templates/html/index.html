@@ -9,49 +9,16 @@
     <title>Clima</title>
 </head>
 <body>
-    <div class="main card center-text">
-        <div class="line-text city">
-            <h3>Sapiranga, RS</h3>
-        </div>
-        <div class="temperature ">
-            <p class="temperature-value">{{temp}}°</p>
-            <div class="temperature-metrics">
-                <p class="current-temperature-metrics">C</p>
-                <p><button class="toggle-temperature-metrics" type="reset" title="Alterar unidade de medidas">F</button></p>
-            </div>
-        </div>
-        <div class="line-text weather-description">
-            <h3>{{description}}</h3>
-        </div>
-        <div class="line-text updated-timestamp">
-            <p>Atualizado à(s) {{current_time}}</p>
-        </div>
-        <div class="table weather-statistics">
-            <table class="">
-                <tr class="">
-                    <td class="">Temp. Máxima {{temp_max}}°</td>
-                    <td class="">Temp. Mínima {{temp_min}}°</td>
-                </tr>
-                <tr class="">
-                    <td class="">Sensação térmica {{feels_like}}°</td>
-                    <td class="">Umidade {{humidity}}%</td>
-                </tr>
-                <tr class="">
-                    <td class="">Vento {{speed}} Km/h</td>
-                    <td class="">Direção </td>
-                </tr>
-                <tr class="">
-                    <td class="" title="">Visibilidade {{visibility}} Km</td>
-                    <td class="" title="">Barômetro {{pressure}} hPa</td>
-                </tr>
-                <tr>
-                    <td class="">Nascer do Sol {{sunrise}}</td>
-                    <td class="">Por do Sol {{sunset}}</td>
-                </tr>
-            </table>
-        </div>
+
+    <div class="search-box-container center-text">
+        <form class="search-box-form" action="/" method="POST">
+            <input class="search-box" type="text" name="city_name" id="city_name" placeholder="Informe a cidade...">
+            <button class="search-box-button" type="submit" title="city_name"><i class="fa-solid fa-magnifying-glass"></i></button>
+        </form>
     </div>
 
-    <script src="../js/index.js"></script>
+    {% block content %}
+    {% endblock %}
+    <script src="https://kit.fontawesome.com/7a5cc2f48d.js" crossorigin="anonymous"></script>
 </body>
 </html>
