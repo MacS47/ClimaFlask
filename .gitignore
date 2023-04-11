@@ -1,2 +1,7 @@
-# Arquivos svg podem ser ou não utilizados no futuro
-.svg
+# Tipos de arquivos
+*.svg
+*.pyc
+
+# Arquivos nomeados
+environment.py
+Roadmap.md

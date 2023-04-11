@@ -1,24 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- <link rel="stylesheet" href="../css/style.css"> -->
-    <link rel="stylesheet" href="{{url_for('static',filename='./css/style.css')}}">
-    <title>Clima</title>
-</head>
-<body>
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link
+            rel="stylesheet"
+            href="{{url_for('static',filename='./css/style.css')}}"
+        />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Sora:wght@100;200;300;400;500;600;700;800&display=swap"
+            rel="stylesheet"
+        />
 
-    <div class="search-box-container center-text">
-        <form class="search-box-form" action="/" method="POST">
-            <input class="search-box" type="text" name="city_name" id="city_name" placeholder="Informe a cidade...">
-            <button class="search-box-button" type="submit" title="city_name"><i class="fa-solid fa-magnifying-glass"></i></button>
-        </form>
-    </div>
+        <title>Clima {{city}}</title>
+    </head>
+    <body>
+        <div class="menu-container center-text">
+            <a class="home-button menu-button" title="Ir para Home" href="home">Home</a>
+            <a class="about-button menu-button" title="Ir para Sobre" href="about">About</a>
+        </div>
 
-    {% block content %}
-    {% endblock %}
-    <script src="https://kit.fontawesome.com/7a5cc2f48d.js" crossorigin="anonymous"></script>
-</body>
+        <div class="search-box-container center-text">
+            <form class="search-box-form" action="/" method="POST">
+                <input
+                    class="search-box"
+                    type="text"
+                    name="city_name"
+                    id="city_name"
+                    placeholder="Informe a cidade..."
+                />
+                <button
+                    class="search-box-button"
+                    type="submit"
+                    title="city_name"
+                >
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </button>
+            </form>
+        </div>
+
+        {% block content %} {% endblock %}
+        <script
+            src="https://kit.fontawesome.com/7a5cc2f48d.js"
+            crossorigin="anonymous"
+        ></script>
+    </body>
 </html>

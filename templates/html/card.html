@@ -1,8 +1,16 @@
 {% extends './html/index.html' %}{% block content %}
 <div class="main card center-text" id="main">
-    <div class="line-text city">
-        <h3>{{city}}</h3>
+
+    <div class="refresh-city-container">
+        <div class="refresh-button-container">
+            <button class="refresh-data-button" id="refresh-data-button" type="reset" title="Atualizar" onclick="toRefresh();"><i class="fa-solid fa-arrows-rotate"></i>
+            </button>
+        </div>
+        <div class="line-text city-line">
+            <h3>{{city}}, {{country}}</h3>
+        </div>
     </div>
+
     <div class="temperature ">
         <p class="temperature-value"><a class="temp">{{temp}}</a>°</p>
         <div class="temperature-metrics">
@@ -14,29 +22,33 @@
         <h3>{{description}}</h3>
     </div>
     <div class="line-text updated-timestamp">
-        <p>Atualizado à(s) {{current_time}}</p>
+        <p class="last-update">Atualizado à(s) {{current_time}}</p>
+        <div class="showtable-button-container">
+            <button class="show-data-button" id="show-data-button" type="reset"  title="Exibir estatísticas" onclick="toShowStatistics();"><i class="fa-solid fa-chevron-down" id="show-data-button-i"></i>
+            </button>
+        </div>
     </div>
-    <div class="table weather-statistics">
-        <table class="">
+    <div class="weather-statistics">
+        <table class="weather-statistics-table">
             <tr class="">
-                <td class="">Temp. Máxima <a class="temp">{{temp_max}}</a>°</td>
-                <td class="">Temp. Mínima <a class="temp">{{temp_min}}</a>°</td>
+                <td class="">Temp. Máxima: <a class="temp">{{temp_max}}</a>°</td>
+                <td class="">Temp. Mínima: <a class="temp">{{temp_min}}</a>°</td>
             </tr>
             <tr class="">
-                <td class="">Sensação térmica <a class="temp">{{feels_like}}</a>°</td>
-                <td class="">Umidade {{humidity}}%</td>
+                <td class="">Sensação térmica: <a class="temp">{{feels_like}}</a>°</td>
+                <td class="">Umidade: {{humidity}}%</td>
             </tr>
             <tr class="">
-                <td class="">Vento {{speed}} Km/h</td>
-                <td class="">Direção </td>
+                <td class="">Vento:<a> </a> <i class="fa-solid fa-location-arrow" id="icon-rot"></i> {{speed}} Km/h <a id="wind-deg">{{deg}}</a></td>
+                <td class="">Nebulosidade {{cloudness}}%</td>
             </tr>
             <tr class="">
-                <td class="" title="">Visibilidade {{visibility}} Km</td>
-                <td class="" title="">Barômetro {{pressure}} hPa</td>
+                <td class="" title="">Visibilidade: {{visibility}} Km</td>
+                <td class="" title="">Barômetro: {{pressure}} hPa</td>
             </tr>
             <tr>
-                <td class="">Nascer do Sol {{sunrise}}</td>
-                <td class="">Por do Sol {{sunset}}</td>
+                <td class="">Nascer do Sol: {{sunrise}}</td>
+                <td class="">Por do Sol: {{sunset}}</td>
             </tr>
         </table>
     </div>

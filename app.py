@@ -1,5 +1,6 @@
 from flask import Flask, render_template, redirect, url_for, request
 from datetime import datetime
+from environment import TOKEN
 import requests
 
 app = Flask(__name__)
@@ -23,13 +24,31 @@ def index_post():
     else:
         return redirect( f'/weather/{city_name}' )
 
+@app.route('/weather')
+def weather():
+    return redirect('/')
 
-@app.route('/weather/<city_name>')
-def weather(city_name):
+@app.route('/about')
+def about():
+    return render_template('./html/about.html')
+
+@app.route('/home')
+def home():
+    return redirect('/')
+
+@app.route('/weather/<parameter>')
+def weather_city(parameter):
     
+    if parameter == 'home':
+        return redirect('/')
+
+    if parameter == 'about':
+        return redirect('/about')
+
+
     # Armazenando valores da chave da API e do nome da cidade
-    token        = ''
-    city         = city_name
+    token        = TOKEN
+    city         = parameter.replace('%20',' ').replace('ã','a').replace('õ','o').replace('ç','c')
 
     # Obtendo dados a partir da API e armazenando a resposta em uma variável
     response     = requests.get(f'http://api.openweathermap.org/data/2.5/weather?q={city}&units=metric&lang=pt_br&APPID={token}')
@@ -43,6 +62,7 @@ def weather(city_name):
         weather_dict = json['weather']
         main         = json['main']
         wind         = json['wind']
+        clouds       = json['clouds']
         dt           = json['dt']
         sys          = json['sys']
 
@@ -57,6 +77,7 @@ def weather(city_name):
 
         # Carregando valores para variáveis que serão utilizadas no HTML
         city         = json.get('name').title()
+        country      = sys.get('country').upper()
         temp         = round( main.get('temp') )
         temp_min     = round( main.get('temp_min') )
         temp_max     = round( main.get('temp_max') )
@@ -66,12 +87,15 @@ def weather(city_name):
         pressure     = main.get('pressure')
         visibility   = round( json.get('visibility') / 1000 )
         speed        = round( ms_to_kmh( wind.get('speed') ) )
+        deg          = wind.get('deg')
+        cloudness    = clouds.get('all')
         sunrise      = sunrise_time
         sunset       = sunset_time
     else:
         # Caso o código de retorno ao chamar a API não seja 200
         # as variáveis receberão o valor N/A
         city         = 'N/A'
+        country      = 'N/A'
         temp         = 'N/A'
         temp_min     = 'N/A'
         temp_max     = 'N/A'
@@ -81,6 +105,8 @@ def weather(city_name):
         pressure     = 'N/A'
         visibility   = 'N/A'
         speed        = 'N/A'
+        deg          = 'N/A'
+        cloudness    = 'N/A'
         sunrise      = 'N/A'
         sunset       = 'N/A'
         current_time = 'N/A'
@@ -88,6 +114,7 @@ def weather(city_name):
     # Retornando a página index.html e as variáveis que serão utilizadas
     return render_template('./html/card.html',
                            city         = city,
+                           country      = country,
                            temp         = temp,
                            temp_min     = temp_min,
                            temp_max     = temp_max,
@@ -98,6 +125,8 @@ def weather(city_name):
                            pressure     = pressure,
                            visibility   = visibility,
                            speed        = speed,
+                           cloudness    = cloudness,
+                           deg          = deg,
                            sunrise      = sunrise,
                            sunset       = sunset,)
 
