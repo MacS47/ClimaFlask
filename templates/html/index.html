@@ -14,13 +14,24 @@
             href="https://fonts.googleapis.com/css2?family=Sora:wght@100;200;300;400;500;600;700;800&display=swap"
             rel="stylesheet"
         />
+        <script
+            src="https://kit.fontawesome.com/7a5cc2f48d.js"
+            crossorigin="anonymous"
+        ></script>
 
         <title>Clima {{city}}</title>
     </head>
     <body>
         <div class="menu-container center-text">
-            <a class="home-button menu-button" title="Ir para Home" href="home">Home</a>
-            <a class="about-button menu-button" title="Ir para Sobre" href="about">About</a>
+            <a class="home-button menu-button" title="Ir para Home" href="home"
+                >Home</a
+            >
+            <a
+                class="about-button menu-button"
+                title="Ir para Sobre"
+                href="about"
+                >About</a
+            >
         </div>
 
         <div class="search-box-container center-text">
@@ -43,9 +54,5 @@
         </div>
 
         {% block content %} {% endblock %}
-        <script
-            src="https://kit.fontawesome.com/7a5cc2f48d.js"
-            crossorigin="anonymous"
-        ></script>
     </body>
 </html>
