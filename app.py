@@ -10,12 +10,12 @@ def ms_to_kmh(speed_ms : float) -> float:
     speed_km : float = speed_ms * 3.6
     return speed_km
 
+# Rota principal
 @app.route('/')
 def index():
     return render_template('./html/index.html')
 
-# Essa rota obtém a cidade pesquisada pelo usuário e baseado no valor
-# redireciona à outra página
+# Essa rota obtém a cidade pesquisada pelo usuário e baseado no valor, redireciona à outra página
 @app.route('/',methods=['POST'])
 def index_post():
     city_name = request.form['city_name']
@@ -24,18 +24,21 @@ def index_post():
     else:
         return redirect( f'/weather/{city_name}' )
 
+# Rota criada para redirecionar o usuário para a página correta
 @app.route('/weather')
 def weather():
     return redirect('/')
-
+# Rota para acessar a página About
 @app.route('/about')
 def about():
     return render_template('./html/about.html')
 
+# Rota para acessar a página Home
 @app.route('/home')
 def home():
     return redirect('/')
 
+# Rota utilizada para exibir os dados climáticos ao usuário
 @app.route('/weather/<parameter>')
 def weather_city(parameter):
     
@@ -133,5 +136,3 @@ def weather_city(parameter):
 
 if __name__ == '__main__':
     app.run(debug=True)
-
-    
