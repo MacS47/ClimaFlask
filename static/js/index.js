@@ -1,3 +1,9 @@
+function updateTime(){
+    date = new Date();
+    currentTime = date.toLocaleTimeString( [], {hour: "2-digit", minute: "2-digit"} );
+    currentTimeElementList = document.getElementsByClassName("current-time")
+    currentTimeElementList[0].innerHTML = currentTime;
+}
 function celsiusToFahrenheit(cel_degrees) {
     fah_degrees = cel_degrees * (9 / 5) + 32;
     return fah_degrees;
@@ -85,11 +91,13 @@ function toShowStatistics(){
 function toRefresh(){
     window.location.reload(true);
 }
+
 document.getElementById("toggle-metrics").onclick = toFahrenheit;
 
 document.getElementById("refresh-data-button").onclick = toRefresh;
 
 document.getElementById("show-data-button").onclick = toShowStatistics;
 
+updateTime();
 setMainColor();
 setWindDegrees();
