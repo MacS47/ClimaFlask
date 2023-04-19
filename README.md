@@ -29,7 +29,7 @@ Os critérios para construção da aplicação são os seguintes:
 
 * Ser uma aplicação web;
 * Ser responsiva, capaz de ser utilizada em qualquer dispositivo;
-* Aproveitar os recursos de do framework Flask para;
+* Aproveitar os recursos do framework Flask para aprimorar o app;
 * Utilizar os recursos da API da OpenWeather;
 
 > Novos critérios podem ser incluídos ao longo do tempo.
@@ -76,11 +76,12 @@ A aplicação é composta por três rotas:
   * [x] Home - 06/04/2023;
   * [x] Weather - 06/04/2023;
   * [x] About - 10/04/2023;
-* [ ] Criar `menu` com os links para Home, Weather e About;
-* [ ] Criar `footer` com dados sobre o desenvolvedor;
+* [x] Criar `menu` com os links para Home, Weather e About 12/04/2023;
+* [x] Criar `footer` com dados sobre o desenvolvedor;
 * [x] Criar botão atualizar, que permita o usuário atualizar o card de temperatura - 09/04/2023;
 * [x] Criar o botão minimizar, que possibilite ao usuário diminuir o tamanho do card de exibição de temperatura 10/04/2023;
 * [ ] Incluir dados de precipitação na tabela de estatísticas;
+* [x] Criar botão para mudar o tema do app;
 
 ### **Javascript**
 
@@ -89,7 +90,8 @@ A aplicação é composta por três rotas:
 * [x] Criar a função que realizará alterações no estilo do ícone que indica a direção do vento - 08/04/2023;
 * [x] Criar a função que atualizará os dados do card de temperatura - 10/04/2023;
 * [x] Criar a função que expande a visualização do card trazendo dados estatísticos 10/04/2023;
-* [x] Criar função para atualizar hora de atualização da aplicação, baseado na localização do usuário - 17/04/2023.
+* [x] Criar função para atualizar hora de atualização da aplicação, baseado na localização do usuário - 17/04/2023;
+* [ ] Criar função responsável por definir o tema do app baseado no tema do sistema ou na opção escolhida pelo usuário;
 
 ### **Flask e Python**
 
