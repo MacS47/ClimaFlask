@@ -1,12 +1,14 @@
-
+// Função utilizada para converter valores de graus centígrados para farenheit
 function celsiusToFahrenheit(cel_degrees) {
     fah_degrees = cel_degrees * (9 / 5) + 32;
     return fah_degrees;
 }
+// Função utilizada para converter valores de graus farenheit para centígrados
 function fahrenheitToCelsius(fah_degrees) {
     cel_degrees = (fah_degrees - 32) * (5 / 9);
     return cel_degrees;
 }
+// Função utilizada para alterar o tema da página, baseado no input do usuário
 function changeTheme() {
     
     let theme = document.getElementById("theme-button");
@@ -48,6 +50,7 @@ function changeTheme() {
         }
     }
 }
+// Função utilizada para aplicar diversas configurações quando a página weather for acessada
 function mainCardSpawn(){
 
     const toggle_metrics = document.getElementById("toggle-metrics");
@@ -150,5 +153,6 @@ function mainCardSpawn(){
     }
 }
 
+// Funções executadas ao abrir a página
 changeTheme();
 mainCardSpawn();
