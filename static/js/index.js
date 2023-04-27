@@ -18,10 +18,14 @@ function changeTheme() {
     // Determinando valores, com base em elementos da página
     let theme = document.getElementById("theme-button");
     let icon_theme = document.getElementById("theme-button-icon");
+    let icon_search = document.getElementById("search-button-icon");
+    let icon_show_data = document.getElementById("show-data-button-i");
+    let icon_refresh_data = document.getElementById("refresh-data-button-i");
     let body_color = document.getElementsByTagName("body");
     
     let toggleThemeFlag = false;
     let bd_white_elements = document.getElementsByClassName("bd-white");
+    let no_bd_elements = document.getElementsByClassName("no-bd");
 
     // Condicionando a execução do código à existência do botão Tema
     // para evitar erros ao carregar a página
@@ -37,6 +41,14 @@ function changeTheme() {
                 icon_theme.classList.remove("fa-moon");
                 icon_theme.classList.add("fa-sun");
                 
+                // Alterando a classe para exibir os ícones da página com o tema escuro
+                icon_search.classList.add("color-warm");
+                icon_show_data.classList.add("color-warm");
+                icon_refresh_data.classList.add("color-warm");
+                
+                // Alterando cor do texto placeholder para o tema claro
+                document.documentElement.style.setProperty("--placeholder-color","#e6e2d3")
+                
                 // Alterando o valor da flag e modificando a cor do plano de fundo
                 toggleThemeFlag = true;
                 body_color[0].style["background"] = "#121212";
@@ -47,11 +59,26 @@ function changeTheme() {
                     bd_white_elements[i].classList.add("bd-warm");
                     bd_white_elements[i].classList.add("color-warm");
                 }
+                
+                // Esse segundo laço é utilizado para manipular elementos que não possuam borda
+                // nesta situação incluir borda com cor diferente
+                for (i = 0; i < no_bd_elements.length; i++) {
+                    no_bd_elements[i].classList.add("bd-warm");
+                    no_bd_elements[i].classList.add("color-warm");
+                }
             } else {
                 
                 // Alterando a classe para exibir o botão de tema adequado
                 icon_theme.classList.remove("fa-sun");
                 icon_theme.classList.add("fa-moon");
+                
+                // Alterando a classe para exibir os ícones da página com o tema claro
+                icon_search.classList.remove("color-warm");
+                icon_show_data.classList.remove("color-warm");
+                icon_refresh_data.classList.remove("color-warm");
+                
+                // Alterando cor do texto placeholder para o tema claro
+                document.documentElement.style.setProperty("--placeholder-color","#757575")
                 
                 // Alterando o valor da flag e modificando a cor do plano de fundo para o padrão                
                 toggleThemeFlag = false;
@@ -62,6 +89,13 @@ function changeTheme() {
                 for (i = 0; i < bd_white_elements.length; i++) {
                     bd_white_elements[i].classList.remove("bd-warm");
                     bd_white_elements[i].classList.remove("color-warm");
+                }
+                
+                // Esse segundo laço é utilizado para manipular elementos que não possuam borda
+                // neste caso remover a borda do tema escuro
+                for (i = 0; i < no_bd_elements.length; i++) {
+                    no_bd_elements[i].classList.remove("bd-warm");
+                    no_bd_elements[i].classList.remove("color-warm");
                 }
             }
         }

@@ -65,13 +65,13 @@
                     type="submit"
                     title="city_name"
                 >
-                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <i id="search-button-icon" class="fa-solid fa-magnifying-glass"></i>
                 </button>
             </form>
         </div>
 
         {% block content %} {% endblock %}
-        <div class="footer-container">
+        <div class="footer-container no-bd">
             <p>2023 - <a href="https://github.com/MacS47">MacS47</a></p>
         </div>
         <script src="{{url_for('static', filename = './js/index.js')}}"></script>

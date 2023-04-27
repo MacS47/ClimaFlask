@@ -91,7 +91,8 @@ A aplicação é composta por três rotas:
 * [x] Criar a função que atualizará os dados do card de temperatura - 10/04/2023;
 * [x] Criar a função que expande a visualização do card trazendo dados estatísticos 10/04/2023;
 * [x] Criar função para atualizar hora de atualização da aplicação, baseado na localização do usuário - 17/04/2023;
-* [ ] Criar função responsável por definir o tema do app baseado no tema do sistema ou na opção escolhida pelo usuário;
+* [x] Criar função responsável por definir o tema do app baseado no tema do sistema ou na opção escolhida pelo usuário 27/04/2023;
+  * [ ] Rever a função para aplicar as definições corretas na interface;
 
 ### **Flask e Python**
 

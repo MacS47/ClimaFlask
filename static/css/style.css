@@ -1,3 +1,11 @@
+/* Variáveis */
+:root{
+    --placeholder-color: #757575;
+}
+::placeholder{
+    color: var(--placeholder-color);
+}
+
 /* Elementos HTML */
 html {
     font-family: 'Sora', sans-serif;
@@ -245,10 +253,10 @@ td {
     border: 1px solid #ffffff;
 }
 .bd-warm{
-    border: 1px solid #e2d9b9;
+    border: 1px solid #e6e2d3;
 }
 .color-warm{
-    color: #e2d9b9;
+    color: #e6e2d3;
 }
 
 /* .dark-theme{
