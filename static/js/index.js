@@ -15,12 +15,14 @@ function fahrenheitToCelsius(fah_degrees) {
 // Função utilizada para alterar o tema da página, baseado no input do usuário
 function changeTheme() {
     
+    // Variável utilizada para verificar se o card main é exibido
+    let main_exists = document.getElementById("main");
+    
+
     // Determinando valores, com base em elementos da página
     let theme = document.getElementById("theme-button");
     let icon_theme = document.getElementById("theme-button-icon");
     let icon_search = document.getElementById("search-button-icon");
-    let icon_show_data = document.getElementById("show-data-button-i");
-    let icon_refresh_data = document.getElementById("refresh-data-button-i");
     let body_color = document.getElementsByTagName("body");
     
     let toggleThemeFlag = false;
@@ -43,9 +45,14 @@ function changeTheme() {
                 
                 // Alterando a classe para exibir os ícones da página com o tema escuro
                 icon_search.classList.add("color-warm");
-                icon_show_data.classList.add("color-warm");
-                icon_refresh_data.classList.add("color-warm");
-                
+
+                if (main_exists){
+                    let icon_show_data = document.getElementById("show-data-button-i");
+                    let icon_refresh_data = document.getElementById("refresh-data-button-i");
+                    icon_show_data.classList.add("color-warm");
+                    icon_refresh_data.classList.add("color-warm");
+                }
+
                 // Alterando cor do texto placeholder para o tema claro
                 document.documentElement.style.setProperty("--placeholder-color","#e6e2d3")
                 
@@ -74,9 +81,13 @@ function changeTheme() {
                 
                 // Alterando a classe para exibir os ícones da página com o tema claro
                 icon_search.classList.remove("color-warm");
-                icon_show_data.classList.remove("color-warm");
-                icon_refresh_data.classList.remove("color-warm");
-                
+                if (main_exists){
+                    let icon_show_data = document.getElementById("show-data-button-i");
+                    let icon_refresh_data = document.getElementById("refresh-data-button-i");
+                    icon_show_data.classList.remove("color-warm");
+                    icon_refresh_data.classList.remove("color-warm");
+                }
+
                 // Alterando cor do texto placeholder para o tema claro
                 document.documentElement.style.setProperty("--placeholder-color","#757575")
                 
@@ -229,12 +240,12 @@ function mainCardSpawn(){
         function setMainColor() {
             date = new Date();
             hour = date.getHours();
-            main = document.getElementsByClassName("main");
+            main_temperature = document.getElementsByClassName("main");
             bg = "linear-gradient(#032233,#0083c97e) no-repeat";
 
             // Verificando a hora do dia para alterar a cor do card.
             if (hour > 17 || hour < 06) {
-                main[0].style["background"] = bg;
+                main_temperature[0].style["background"] = bg;
             }
         }
 
