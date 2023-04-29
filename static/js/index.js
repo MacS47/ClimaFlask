@@ -1,36 +1,24 @@
 
-function isSetLightTheme(){
+function isSetDarkTheme(){
     cookie_list = document.cookie.split(";");
-    is_set = false;
 
     for (i = 0; i < cookie_list.length; i++){
-        if(cookie_list[i] == "theme=light-theme"){
+        if(cookie_list[i] == "theme=dark-theme"){
             is_set = true;
+        }else{
+            is_set = false;
         }
     }
     return is_set
 }
 
-
-// Função utilizada para converter valores de graus centígrados para farenheit
-function celsiusToFahrenheit(cel_degrees) {
-    fah_degrees = cel_degrees * (9 / 5) + 32;
-    // Retornando o valor convertido para farenheit
-    return fah_degrees;
-}
-
-// Função utilizada para converter valores de graus farenheit para centígrados
-function fahrenheitToCelsius(fah_degrees) {
-    cel_degrees = (fah_degrees - 32) * (5 / 9);
-    // Retornando o valor obtido em graus
-    return cel_degrees;
-}
-
-let theme = document.getElementById("theme-button");
-
-// Função utilizada para alterar o tema da página, baseado no input do usuário
-theme.onclick = function() {
+function changeTheme(){
     
+    is_set = isSetDarkTheme();
+    console.log(is_set);
+
+    if(is_set) {
+
     // Variável utilizada para verificar se o card main é exibido
     let main_exists = document.getElementById("main");
 
@@ -42,11 +30,7 @@ theme.onclick = function() {
     let bd_white_elements = document.getElementsByClassName("bd-white");
     let no_bd_elements = document.getElementsByClassName("no-bd");
     
-    
-    // Verificando se o tema atual é claro (flag falsa)
-    if (isSetLightTheme()) {
-        
-        
+                
         // Alterando a classe para exibir o botão de tema apropriado
         icon_theme.classList.remove("fa-moon");
         icon_theme.classList.add("fa-sun");
@@ -83,6 +67,82 @@ theme.onclick = function() {
         }
 
         document.cookie = "theme=dark-theme";
+        console.log("Alterado para o tema escuro");
+    }
+}
+// Função utilizada para converter valores de graus centígrados para farenheit
+function celsiusToFahrenheit(cel_degrees) {
+    fah_degrees = cel_degrees * (9 / 5) + 32;
+    // Retornando o valor convertido para farenheit
+    return fah_degrees;
+}
+
+// Função utilizada para converter valores de graus farenheit para centígrados
+function fahrenheitToCelsius(fah_degrees) {
+    cel_degrees = (fah_degrees - 32) * (5 / 9);
+    // Retornando o valor obtido em graus
+    return cel_degrees;
+}
+
+let theme = document.getElementById("theme-button");
+
+// Função utilizada para alterar o tema da página, baseado no input do usuário
+theme.onclick = function() {
+    console.log("Clicou no botão tema");
+
+    // Variável utilizada para verificar se o card main é exibido
+    let main_exists = document.getElementById("main");
+
+    // Determinando valores, com base em elementos da página
+    let icon_theme = document.getElementById("theme-button-icon");
+    let icon_search = document.getElementById("search-button-icon");
+    let body_color = document.getElementsByTagName("body");
+    
+    let bd_white_elements = document.getElementsByClassName("bd-white");
+    let no_bd_elements = document.getElementsByClassName("no-bd");
+    
+    
+    // Verificando se o tema atual é claro (flag falsa)
+    if (isSetDarkTheme() == false) {
+                
+        // Alterando a classe para exibir o botão de tema apropriado
+        icon_theme.classList.remove("fa-moon");
+        icon_theme.classList.add("fa-sun");
+        
+        // Alterando a classe para exibir os ícones da página com o tema escuro
+        icon_search.classList.add("color-warm");
+
+        if (main_exists){
+            let icon_show_data = document.getElementById("show-data-button-i");
+            let icon_refresh_data = document.getElementById("refresh-data-button-i");
+            icon_show_data.classList.add("color-warm");
+            icon_refresh_data.classList.add("color-warm");
+        }
+
+        // Alterando cor do texto placeholder para o tema claro
+        document.documentElement.style.setProperty("--placeholder-color","#e6e2d3")
+        
+        // Alterando o valor da flag e modificando a cor do plano de fundo
+        toggleThemeFlag = true;
+        body_color[0].style["background"] = "#121212";
+        
+        // Laço criado para incluir as classes bd-warm e color-warm, com o objetivo
+        // de alterar o estilo dos elementos da página, para o tema escuro
+        for (i = 0; i < bd_white_elements.length; i++) {
+            bd_white_elements[i].classList.add("bd-warm");
+            bd_white_elements[i].classList.add("color-warm");
+        }
+        
+        // Esse segundo laço é utilizado para manipular elementos que não possuam borda
+        // nesta situação incluir borda com cor diferente
+        for (i = 0; i < no_bd_elements.length; i++) {
+            no_bd_elements[i].classList.add("bd-warm");
+            no_bd_elements[i].classList.add("color-warm");
+        }
+
+        document.cookie = "theme=dark-theme";
+        console.log("Alterado para o tema escuro");
+
 
     } else {
         
@@ -123,6 +183,7 @@ theme.onclick = function() {
         }
 
         document.cookie = "theme=light-theme";
+        console.log("Alterado para o tema claro");
     }    
 }
 
@@ -279,11 +340,8 @@ function mainCardSpawn(){
 }
 
 
-
-
-
 // Funções executadas ao abrir a página, independente do conteúdo existente
-
+changeTheme();
 mainCardSpawn();
 
-console.log(document.cookie);
+console.log("Cookies: "+document.cookie);
