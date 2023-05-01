@@ -80,7 +80,7 @@ A aplicação é composta por três rotas:
 * [x] Criar `footer` com dados sobre o desenvolvedor;
 * [x] Criar botão atualizar, que permita o usuário atualizar o card de temperatura - 09/04/2023;
 * [x] Criar o botão minimizar, que possibilite ao usuário diminuir o tamanho do card de exibição de temperatura 10/04/2023;
-* [ ] Incluir dados de precipitação na tabela de estatísticas;
+* [ ] Incluir dados de precipitação na tabela de estatísticas; (Esses dados estão ausentes na atual versão da API)
 * [x] Criar botão para mudar o tema do app;
 
 ### **Javascript**
@@ -107,3 +107,4 @@ A aplicação é composta por três rotas:
 * [x] Configurar a aplicação para consumir a API da OpenWeather - 05/04/2023;
 * [x] Criar método POST para obter a cidade informada pelo usuário(a) - 07/04/20223;
 * [ ] Incluir dados de precipitação da API; (Esses dados estão ausentes na atual versão da API)
+* [X] Criar rota para obter dados climáticos em JSON;
