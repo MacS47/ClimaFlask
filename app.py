@@ -28,6 +28,7 @@ def index_post():
 @app.route('/weather')
 def weather():
     return redirect('/')
+
 # Rota para acessar a página About
 @app.route('/about')
 def about():
@@ -134,5 +135,33 @@ def weather_city(parameter):
                            sunset       = sunset,)
 
 
+@app.route('/api/v1/<parameter>', methods=['GET'])
+def getapiv1(parameter):
+    
+    if parameter == 'home':
+        return redirect('/')
+
+    if parameter == 'about':
+        return redirect('/about')
+    
+    # Armazenando valores da chave da API e do nome da cidade
+    token        = TOKEN
+    city         = parameter.replace('%20',' ').replace('ã','a').replace('õ','o').replace('ç','c')
+
+    # Obtendo dados a partir da API e armazenando a resposta em uma variável
+    response     = requests.get(f'http://api.openweathermap.org/data/2.5/weather?q={city}&units=metric&lang=pt_br&APPID={token}')
+
+    # Verificando o código de retorno ao chamar a API
+    if response.status_code == 200:
+
+        # Armazenando o conteúdo de response em json
+        json     = response.json()
+
+        # Retornando ao usuário o arquivo json com os dados para a cidade informada como parâmetro
+        return json
+    else:
+
+        return "Erro! Não foi possível obter os dados. Tente novamente mais tarde."
+
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0')
+    app.run()

@@ -106,4 +106,4 @@ A aplicação é composta por três rotas:
   * [x] Rota `home` - 10/04/2023
 * [x] Configurar a aplicação para consumir a API da OpenWeather - 05/04/2023;
 * [x] Criar método POST para obter a cidade informada pelo usuário(a) - 07/04/20223;
-* [ ] Incluir dados de precipitação da API;
+* [ ] Incluir dados de precipitação da API; (Esses dados estão ausentes na atual versão da API)
