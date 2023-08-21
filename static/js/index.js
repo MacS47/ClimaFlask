@@ -84,7 +84,7 @@ function changeTheme(is_set) {
         // }
 
         document.cookie = "theme=dark-theme";
-        console.log("Alterado para o tema escuro");
+        // console.log("Alterado para o tema escuro");
     }
 }
 // Função utilizada para converter valores de graus centígrados para farenheit
@@ -103,7 +103,7 @@ let theme = document.getElementById("theme-button");
 
 // Função utilizada para alterar o tema da página, baseado no input do usuário
 theme.onclick = function () {
-    console.log("Clicou no botão tema");
+    // console.log("Clicou no botão tema");
 
     // Variável utilizada para verificar se o card main é exibido
     let main_exists = document.getElementById("main");
@@ -153,7 +153,7 @@ theme.onclick = function () {
                 element.classList.add("bd-warm", "color-warm");
             });
         }
-        
+
         // Atualizado:
         // O laço antigo foi substituído por JSX
         {
@@ -170,7 +170,7 @@ theme.onclick = function () {
         // }
 
         document.cookie = "theme=dark-theme";
-        console.log("Alterado para o tema escuro");
+        // console.log("Alterado para o tema escuro");
     } else {
         
         // Alterando a classe para exibir o botão de tema adequado
@@ -230,7 +230,7 @@ theme.onclick = function () {
         // }
 
         document.cookie = "theme=light-theme";
-        console.log("Alterado para o tema claro");
+        // console.log("Alterado para o tema claro");
     }
 };
 
