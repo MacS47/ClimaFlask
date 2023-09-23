@@ -117,6 +117,7 @@ td {
     background: linear-gradient(#0272af 50%, #0083c97e 100%);
     background: linear-gradient(#315b9f 50%, #0083c97e 100%);
     border-radius: 25px;
+    border: 1px solid transparent;
     box-shadow: 0px 0px 30px #818181;
     text-shadow: 0px 0px 10px #ffffff7c;
     color: #ffffff;
@@ -215,7 +216,7 @@ td {
 .footer-container {
     background: linear-gradient(#213d6c 0%, #315b9f 100%);
     box-shadow: 0px 0px 20px #818181;
-    border-style: none;
+    border: 1px solid transparent;
     border-radius: 25px;
     color: #ffffff;
     margin: auto;

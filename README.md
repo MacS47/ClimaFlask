@@ -17,6 +17,8 @@
 
 Esse arquivo foi criado para proporcionar ao desenvolvedor e às pessoas que acompanharem o projeto, uma perspectiva/roadmap do desenvolvimento do produto.
 
+O webapp está disponível [aqui](https://clima-flask-openweather.onrender.com/), hospedado na nuvem do [Render](https://render.com/).
+
 ## Contexto
 
 Há algum tempo, decidi criar uma aplicação com interface gráfica em Python capaz de obter dados climáticos em tempo real. Confesso que gostei muito do resultado, que pode ser conferido no repositório [github.com/MacS47/Clima](https://github.com/MacS47/Clima). Com o passar do tempo encontrei a oportunidade de melhorar o app.
