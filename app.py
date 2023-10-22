@@ -1,9 +1,15 @@
-from flask import Flask, render_template, redirect, url_for, request
+from flask import Flask, render_template, redirect, url_for, request, session
 from datetime import datetime
 from environment import TOKEN
-import requests
+import requests, hashlib, bleach
+
+now = datetime.now()
+key = f'{now.year}{now.month}{now.day}{now.hour}{now.minute}{now.second}{now.microsecond}'
+session_key = hashlib.sha256(key.encode()).hexdigest()
 
 app = Flask(__name__)
+app.config['PERMANENT_SESSION_LIFETIME'] = 1800
+app.secret_key = session_key
 
 # Função criada para converter M/s para Km/h
 def ms_to_kmh(speed_ms : float) -> float:
@@ -11,9 +17,25 @@ def ms_to_kmh(speed_ms : float) -> float:
     return speed_km
 
 # Rota principal
-@app.route('/')
+@app.route('/', methods=['GET', 'POST'])
 def index():
-    return render_template('./html/index.html')
+    # Verificando se o método utilizado é POST
+    if request.method == 'POST':
+        # Armazenando o valor da cidade pesquisada pelo usuário
+        city_name = request.form['city_name']
+        # Verificando se o valor da cidade é vazio
+        if city_name == '':
+            # Se o valor for vazio, redireciona o usuário para a página principal
+            return redirect('/')
+        else:
+            # Se o valor não for vazio, armazena o valor da cidade na sessão e redireciona o usuário para a página de clima
+            session['city_name'] = city_name
+            return redirect( f'/weather/{city_name}' )
+    else:
+        # Se o método utilizado for GET, verifica se o valor da cidade está armazenado na sessão
+        city_name = session.get('city_name', '')
+        city_name = bleach.clean(city_name)
+        return render_template('./html/index.html', city_name=city_name)
 
 # Essa rota obtém a cidade pesquisada pelo usuário e baseado no valor, redireciona à outra página
 @app.route('/',methods=['POST'])
@@ -22,17 +44,22 @@ def index_post():
     if city_name == '':
         return redirect('/')
     else:
-        return redirect( f'/weather/{city_name}' )
+        return redirect( f'/weather/{city_name}')
 
 # Rota criada para redirecionar o usuário para a página correta
 @app.route('/weather')
-def weather():
+def weather():    
     return redirect('/')
 
 # Rota para acessar a página About
 @app.route('/about')
 def about():
-    return render_template('./html/about.html')
+    city_name = session.get('city_name', '')
+    city_name = bleach.clean(city_name)
+    if city_name == '':
+        return render_template('./html/about.html')
+    else:
+        return render_template('/html/about.html', city_name=city_name)
 
 # Rota para acessar a página Home
 @app.route('/home')
@@ -42,11 +69,13 @@ def home():
 # Rota utilizada para exibir os dados climáticos ao usuário
 @app.route('/weather/<parameter>')
 def weather_city(parameter):
+    city_name = session.get('city_name', '')
+    city_name = bleach.clean(city_name)
     
     if parameter == 'home':
         return redirect('/')
 
-    if parameter == 'about':
+    elif parameter == 'about':
         return redirect('/about')
 
 
@@ -132,9 +161,10 @@ def weather_city(parameter):
                            cloudness    = cloudness,
                            deg          = deg,
                            sunrise      = sunrise,
-                           sunset       = sunset,)
+                           sunset       = sunset,
+                           city_name    = parameter)
 
-
+# Rota para acessar a API
 @app.route('/api/v1/<parameter>', methods=['GET'])
 def getapiv1(parameter):
     
