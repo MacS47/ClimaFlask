@@ -10,6 +10,7 @@ function isSetDarkTheme() {
     return is_set;
 }
 
+// Function utilizada para alterar o tema da página, baseado no cookie
 function changeTheme(is_set) {
     if (is_set) {
         
@@ -197,7 +198,7 @@ theme.onclick = function () {
 
         // Alterando o valor da flag e modificando a cor do plano de fundo para o padrão
         toggleThemeFlag = false;
-        body_color[0].style["background"] = "#f7f7f7";
+        body_color[0].style["background"] = "linear-gradient(#315b9f 50%, #0083c97e 100%)";
 
         // Atualizado:
         // O laço antigo foi substituído por JSX
@@ -371,7 +372,7 @@ function mainCardSpawn() {
             bg = "linear-gradient(#032233,#0083c97e) no-repeat";
 
             // Verificando a hora do dia para alterar a cor do card.
-            if (hour > 17 || hour < 06) {
+            if (hour > 17 || hour < 6) {
                 main_temperature[0].style["background"] = bg;
             }
         }

@@ -1,0 +1,90 @@
+@import url("./variables.css");
+
+    
+.card {
+    /* background: linear-gradient(45deg,rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1)); */
+    background: rgba(255, 255, 255, 0.1);
+    outline: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 1rem;
+    text-shadow: 0px 0px 10px rgba(255, 255, 255, 0.3);
+    color: var(--white);
+    height: fit-content;
+    margin: 2rem auto;
+    width: 24rem;
+    padding: 1rem 0px;
+    transition: 1s;
+}
+
+.temperature {
+    display: inline-flex;
+}
+
+.temperature-value {
+    font-size: 60px;
+    margin: auto;
+    padding: auto;
+}
+
+.toggle-temperature-metrics {
+    background: rgba(255, 255, 255, 0.1);
+    border: hidden;
+    border-radius: 1rem;
+    color: var(--white);
+    height: 30px;
+    opacity: 0.3;
+    outline: 1px solid rgba(255, 255, 255, 0.3);
+    transition: 0.4s;
+    width: 30px;
+
+    &:hover{
+        opacity: 1;
+    }
+}
+
+.last-update {
+    margin: 10px 0px 0px 0px;
+}
+
+.showtable-button-container {
+    text-align: right;
+    padding: 0px 30px 0px 0px;
+}
+
+.show-data-button {
+    background: transparent;
+    border: hidden;
+    color: var(--white);
+    text-shadow: 0px 0px 10px rgba(255, 255, 255, 0.3);
+}
+
+/* Estatísticas */
+.weather-statistics {
+    height: 0px;
+    transition: height 0.4s
+}
+
+.weather-statistics.show {
+    height: 222px;
+}
+
+.weather-statistics-table {
+    display: none;
+}
+
+.refresh-button-container {
+    text-align: right;
+    padding: 10px 30px 0px 0px;
+}
+
+.refresh-data-button {
+    background: transparent;
+    border: hidden;
+    color: var(--white);
+    text-shadow: 0px 0px 10px rgba(255, 255, 255, 0.3);
+}
+
+@media screen and (max-width: 768px) {
+    .card {
+        width: 100%;
+    }
+}

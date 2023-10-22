@@ -27,21 +27,23 @@
         <title>Clima {{city}}</title>
     </head>
     <body>
-        <div class="menu-container center-text">
-            <a
-                class="home-button menu-button bd-white"
-                title="Ir para Home"
-                href="home"
-                >Home</a
-            >
-            <a
-                class="about-button menu-button bd-white"
-                title="Ir para Sobre"
-                href="about"
-                >About</a
-            >
+        <header id="header">
+            <div class="menu-container ">
+                <a
+                    class="menu-item home-button menu-button"
+                    title="Ir para Início"
+                    href="home"
+                    >Início</a
+                >
+                <a
+                    class="menu-item about-button menu-button"
+                    title="Ir para Sobre"
+                    href="about"
+                    >Sobre</a
+                >
+            </div>
             <button
-                class="theme-button menu-button bd-white"
+                class="theme-button menu-button"
                 title="Alterar tema"
                 type="button"
                 onclick="toggleTheme();"
@@ -49,31 +51,34 @@
             >
             <i id="theme-button-icon" class="fa-regular fa-moon"></i>
             </button>
-        </div>
 
-        <div class="search-box-container center-text bd-white">
-            <form class="search-box-form" action="/" method="POST">
-                <input
-                    class="search-box"
-                    type="text"
-                    name="city_name"
-                    id="city_name"
-                    placeholder="Informe a cidade..."
-                />
-                <button
-                    class="search-box-button"
-                    type="submit"
-                    title="city_name"
-                >
-                    <i id="search-button-icon" class="fa-solid fa-magnifying-glass"></i>
-                </button>
-            </form>
-        </div>
-
-        {% block content %} {% endblock %}
-        <div class="footer-container no-bd">
-            <p>2023 - <a href="https://github.com/MacS47">MacS47</a></p>
-        </div>
+        </header>
+        <main>
+            <div class="search-box-container center-text">
+                <form class="search-box-form" action="/" method="POST">
+                    <input
+                        class="search-box-input"
+                        type="text"
+                        name="city_name"
+                        id="city_name"
+                        placeholder="Informe a cidade..."
+                    />
+                    <button
+                        class="search-box-button"
+                        type="submit"
+                        title="city_name"
+                    >
+                        <i id="search-button-icon" class="fa-solid fa-magnifying-glass"></i>
+                    </button>
+                </form>
+            </div>
+            {% block content %} {% endblock %}
+        </main>
+        <footer id="footer">
+            <div class="footer-container no-bd">
+                <p>2023 - <a href="https://github.com/MacS47">MacS47</a></p>
+            </div>
+        </footer>
         <script src="{{url_for('static', filename = './js/index.js')}}"></script>
     </body>
 </html>

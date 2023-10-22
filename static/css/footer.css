@@ -1,0 +1,28 @@
+
+#footer{
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 1rem;
+    bottom: 8px;
+    outline: 1px solid rgba(255,255,255,0.3);
+    position: sticky;
+    text-shadow: 0px 0px 10px rgba(255, 255, 255, 0.3);
+    width: 100%;
+
+
+    .footer-container {
+        outline: 1px solid transparent;
+        color: #ffffff;
+        margin: auto;
+        padding: 1rem 0rem;
+        text-align: center;
+        z-index: 1;
+    }
+    .footer-container
+    a,
+    .footer-container a:visited,
+    .footer-container a:hover,
+    .footer-container a:active {
+        color: #ffffff;
+        text-decoration: none;
+    }
+}

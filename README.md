@@ -60,14 +60,18 @@ Depois disso basta clicar no link `http://127.0.0.1:5000` e você será redireci
 A aplicação é composta por três rotas:
 
 * Home
-![Captura de tela da página Home](./Screenshots/home.png)
+![Captura de tela da página Home](./Screenshots/_.png#gh-light-mode-only)
+![Captura de tela da página Home](./Screenshots/_darkmode.png#gh-dark-mode-only)
 
 * Weather
-![Captura de tela da página Weather com os dados climáticos da cidade de São Paulo](./Screenshots/weather.png)
-![Captura de tela da página Weather com o card principal expandido](./Screenshots/weather_expand.png)
+![Captura de tela da página Weather com os dados climáticos da cidade de São Paulo](./Screenshots/_weather_Sao_Paulo_lightmode_c.png#gh-light-mode-only)
+![Captura de tela da página Weather com os dados climáticos da cidade de São Paulo](./Screenshots/_weather_Sao_Paulo_darkmode_c.png#gh-dark-mode-only)
+![Captura de tela da página Weather com o card principal expandido](./Screenshots/_weather_Sao_Paulo_lightmode_c_exp.png#gh-light-mode-only)
+![Captura de tela da página Weather com o card principal expandido](./Screenshots/_weather_Sao_Paulo_darkmode_c_exp.png#gh-dark-mode-only)
 
 * About
-![Captura de tela da página About](./Screenshots/about.png)
+![Captura de tela da página About](./Screenshots/_about.png#gh-light-mode-only)
+![Captura de tela da página About](./Screenshots/_about_darkmode.png#gh-dark-mode-only)
 
 ## Roadmap
 
