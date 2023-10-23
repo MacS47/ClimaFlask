@@ -1,93 +1,3 @@
-function isSetDarkTheme() {
-    const cookie_list = document.cookie.split(";");
-    let is_set = false;
-
-    {
-        cookie_list.map(element => {
-            element === "theme=dark-theme" && (is_set = true);
-        });
-    }
-    return is_set;
-}
-
-// Function utilizada para alterar o tema da página, baseado no cookie
-function changeTheme(is_set) {
-    if (is_set) {
-        
-        // Variável utilizada para verificar se o card main é exibido
-        let main_exists = document.getElementById("main");
-
-        // Determinando valores, com base em elementos da página
-        let icon_theme = document.getElementById("theme-button-icon");
-        let icon_search = document.getElementById("search-button-icon");
-        let body_color = document.getElementsByTagName("body");
-
-        let items = document.getElementsByClassName("bd-white");
-        let bd_white_elements = Array.from(items);
-        items = document.getElementsByClassName("no-bd");
-        let no_bd_elements = Array.from(items);
-
-        // Alterando a classe para exibir o botão de tema apropriado
-        icon_theme.classList.remove("fa-moon");
-        icon_theme.classList.add("fa-sun");
-
-        // Alterando a classe para exibir os ícones da página com o tema escuro
-        icon_search.classList.add("color-warm");
-
-        if (main_exists) {
-            let icon_show_data = document.getElementById("show-data-button-i");
-            let icon_refresh_data = document.getElementById(
-                "refresh-data-button-i"
-            );
-            icon_show_data.classList.add("color-warm");
-            icon_refresh_data.classList.add("color-warm");
-        }
-
-        // Alterando cor do texto placeholder para o tema claro
-        document.documentElement.style.setProperty(
-            "--placeholder-color",
-            "#e6e2d3"
-        );
-
-        // Alterando o valor da flag e modificando a cor do plano de fundo
-        toggleThemeFlag = true;
-        body_color[0].style["background"] = "#121212";
-
-        // Atualizado:
-        // O laço antigo foi substituído por JSX
-        {
-            bd_white_elements.map((element) => {
-                element.classList.add("bd-warm", "color-warm");
-            });
-        }
-
-        // Laço criado para incluir as classes bd-warm e color-warm, com o objetivo
-        // de alterar o estilo dos elementos da página, para o tema escuro
-        // for (i = 0; i < bd_white_elements.length; i++) {
-        //     bd_white_elements[i].classList.add("bd-warm");
-        //     bd_white_elements[i].classList.add("color-warm");
-        // }
-
-        // Atualizado:
-        // O laço antigo foi substituído por JSX
-
-        {
-            no_bd_elements.map((element) => {
-                element.classList.add("bd-warm", "color-warm");
-            });
-        }
-
-        // Esse segundo laço é utilizado para manipular elementos que não possuam borda
-        // nesta situação incluir borda com cor diferente
-        // for (i = 0; i < no_bd_elements.length; i++) {
-        //     no_bd_elements[i].classList.add("bd-warm");
-        //     no_bd_elements[i].classList.add("color-warm");
-        // }
-
-        document.cookie = "theme=dark-theme";
-        // console.log("Alterado para o tema escuro");
-    }
-}
 // Função utilizada para converter valores de graus centígrados para farenheit
 function celsiusToFahrenheit(cel_degrees) {
     // Retornando o valor convertido para farenheit
@@ -100,140 +10,90 @@ function fahrenheitToCelsius(fah_degrees) {
     return ((fah_degrees - 32) * (5 / 9));
 }
 
-let theme = document.getElementById("theme-button");
+// Função utilizada para obter o tema atual da página, baseado nos dados da sessão
+function getSessionTheme(){
+    // Retornando uma promessa, para que a função possa ser utilizada com async/await
+    return new Promise( function(resolve, reject){
+        $.get("/theme", function (data) {
+            resolve(data.theme);
+        });
+    });
+};
+
+// Função utilizada para definir o tema da página e armazená-lo na sessão
+function setSessionTheme(theme){
+    $.post("/theme/"+theme);
+};
 
 // Função utilizada para alterar o tema da página, baseado no input do usuário
-theme.onclick = function () {
-    // console.log("Clicou no botão tema");
-
-    // Variável utilizada para verificar se o card main é exibido
-    let main_exists = document.getElementById("main");
-
-    // Determinando valores, com base em elementos da página
+async function toggleAppTheme(onStart = false) {
+    
+    // Obtendo o tema atual da página
+    let currentTheme = await getSessionTheme();
+    
+    // Definindo variáveis
+    let bkgDark = "#121212";
+    let bkgLight = "linear-gradient(#315b9f 50%, #0083c97e 100%)";
     let icon_theme = document.getElementById("theme-button-icon");
-    let icon_search = document.getElementById("search-button-icon");
     let body_color = document.getElementsByTagName("body");
 
-    let items = document.getElementsByClassName("bd-white");
-    let bd_white_elements = Array.from(items);
-    items = document.getElementsByClassName("no-bd");
-    let no_bd_elements = Array.from(items);
 
-    // Verificando se o tema atual é claro (flag falsa)
-    if (!isSetDarkTheme()) {
-        // Alterando a classe para exibir o botão de tema apropriado
-        icon_theme.classList.remove("fa-moon");
-        icon_theme.classList.add("fa-sun");
+    // Verificando se é a primeira vez que a função é executada
+    // Se for a primeira vez as cores são definidas baseadas no tema atual da página baseado no dados da sessão
+    if (onStart){
 
-        // Alterando a classe para exibir os ícones da página com o tema escuro
-        icon_search.classList.add("color-warm");
+        // Verificando qual o tema atual da página
+        if(currentTheme === 'dark'){
 
-        if (main_exists) {
-            let icon_show_data = document.getElementById("show-data-button-i");
-            let icon_refresh_data = document.getElementById(
-                "refresh-data-button-i"
-            );
-            icon_show_data.classList.add("color-warm");
-            icon_refresh_data.classList.add("color-warm");
+            // Alterando o ícone do botão de tema para o ícone do tema escuro
+            icon_theme.classList.remove("fa-moon");
+            icon_theme.classList.add("fa-sun");
+
+            // Alterando a flag de controle de tema na sessão
+            body_color[0].style["background"] = bkgDark;
+
+        }
+        else{
+
+            // Alterando o ícone do botão de tema para o ícone do tema claro
+            icon_theme.classList.remove("fa-sun");
+            icon_theme.classList.add("fa-moon");
+
+            // Alterando a flag de controle de tema na sessão
+            body_color[0].style["background"] = bkgLight;
+            
         }
 
-        // Alterando cor do texto placeholder para o tema claro
-        document.documentElement.style.setProperty(
-            "--placeholder-color",
-            "#e6e2d3"
-        );
+    }else{
+        // Se não for a primeira vez que a função é executada, o tema é alterado
 
-        // Alterando o valor da flag e modificando a cor do plano de fundo
-        toggleThemeFlag = true;
-        body_color[0].style["background"] = "#121212";
+        if(currentTheme === 'light'){
 
-        // Atualizado:
-        // O laço antigo foi substituído por JSX
-        {
-            bd_white_elements.map((element)=>{
-                element.classList.add("bd-warm", "color-warm");
-            });
+            // Alterando o ícone do botão de tema para o ícone do tema escuro
+            icon_theme.classList.remove("fa-moon");
+            icon_theme.classList.add("fa-sun");
+
+            // Alterando a cor do plano de fundo para o tema escuro
+            body_color[0].style["background"] = bkgDark;
+
+            // Alterando a flag de controle de tema na sessão
+            setSessionTheme('dark');
+
         }
+        else{
+            // Alterando o ícone do botão de tema para o ícone do tema claro
+            icon_theme.classList.remove("fa-sun");
+            icon_theme.classList.add("fa-moon");
 
-        // Atualizado:
-        // O laço antigo foi substituído por JSX
-        {
-            no_bd_elements.map((element)=>{
-                element.classList.add("bd-warm", "color-warm");
-            });
+            // Alterando a cor do plano de fundo para o tema claro
+            body_color[0].style["background"] = bkgLight;
+            
+            // Alterando a flag de controle de tema na sessão
+            setSessionTheme('light');
         }
-
-        // Esse segundo laço é utilizado para manipular elementos que não possuam borda
-        // nesta situação incluir borda com cor diferente
-        // for (i = 0; i < no_bd_elements.length; i++) {
-        //     no_bd_elements[i].classList.add("bd-warm");
-        //     no_bd_elements[i].classList.add("color-warm");
-        // }
-
-        document.cookie = "theme=dark-theme";
-        // console.log("Alterado para o tema escuro");
-    } else {
-        
-        // Alterando a classe para exibir o botão de tema adequado
-        icon_theme.classList.remove("fa-sun");
-        icon_theme.classList.add("fa-moon");
-
-        // Alterando a classe para exibir os ícones da página com o tema claro
-        icon_search.classList.remove("color-warm");
-
-        if (main_exists) {
-            let icon_show_data = document.getElementById("show-data-button-i");
-            let icon_refresh_data = document.getElementById(
-                "refresh-data-button-i"
-            );
-            icon_show_data.classList.remove("color-warm");
-            icon_refresh_data.classList.remove("color-warm");
-        }
-
-        // Alterando cor do texto placeholder para o tema claro
-        document.documentElement.style.setProperty(
-            "--placeholder-color",
-            "#757575"
-        );
-
-        // Alterando o valor da flag e modificando a cor do plano de fundo para o padrão
-        toggleThemeFlag = false;
-        body_color[0].style["background"] = "linear-gradient(#315b9f 50%, #0083c97e 100%)";
-
-        // Atualizado:
-        // O laço antigo foi substituído por JSX
-        {
-            bd_white_elements.map((element)=>{
-                element.classList.remove("bd-warm", "color-warm");
-            });
-        }
-
-        // Laço criado para remover as classes bd-warm e color-warm, com o objetivo
-        // de alterar o estilo dos elementos da página, para o tema claro
-        // for (i = 0; i < bd_white_elements.length; i++) {
-        //     bd_white_elements[i].classList.remove("bd-warm");
-        //     bd_white_elements[i].classList.remove("color-warm");
-        // }
-
-        // Atualizado:
-        // O laço antigo foi substituído por JSX
-        {
-            no_bd_elements.map((element)=>{
-                element.classList.remove("bd-warm", "color-warm");
-            });
-        }
-
-        // Esse segundo laço é utilizado para manipular elementos que não possuam borda
-        // neste caso remover a borda do tema escuro
-        // for (i = 0; i < no_bd_elements.length; i++) {
-        //     no_bd_elements[i].classList.remove("bd-warm");
-        //     no_bd_elements[i].classList.remove("color-warm");
-        // }
-
-        document.cookie = "theme=light-theme";
-        // console.log("Alterado para o tema claro");
-    }
+    };
 };
+
 
 // Função utilizada para aplicar diversas configurações quando a página weather for acessada
 function mainCardSpawn() {
@@ -266,36 +126,27 @@ function mainCardSpawn() {
                     )[0].innerHTML = "C";
 
                     // Obtendo lista de elementos que exibem temperatura na página
-                    temp = document.getElementsByClassName("temp");
+                    tempCelsius = Array.from(document.getElementsByClassName("temp"));
 
-                    for (i = 0; i < temp.length; i++) {
-                        celsius = Number(temp[i].innerHTML);
-                        temp[i].innerHTML = Math.round(
-                            celsiusToFahrenheit(celsius)
-                        );
-                    }
+                    // Laço utilizado para alterar o valor de cada elemento com dados de temperatura, para a unidade de medidas em questão
+                    tempCelsius.forEach((element) => {
+                        element.innerHTML = Math.round(celsiusToFahrenheit(Number(element.innerHTML)));
+                    });
 
                     // Definindo o conteúdo do elemento que possui a unidade de medidas
                     current_metric = "F";
                 } else {
                     // Ajustando interface do card de temperatura para atender a exibição da unidade de medidas padrão
-                    document.getElementsByClassName(
-                        "current-temperature-metrics"
-                    )[0].innerHTML = "C";
-                    document.getElementsByClassName(
-                        "toggle-temperature-metrics"
-                    )[0].innerHTML = "F";
+                    document.getElementsByClassName("current-temperature-metrics")[0].innerHTML = "C";
+                    document.getElementsByClassName("toggle-temperature-metrics")[0].innerHTML = "F";
 
                     // Obtendo lista de elementos que exibem temperatura na página
-                    temp = document.getElementsByClassName("temp");
+                    tempFarenheit = Array.from(document.getElementsByClassName("temp"));
 
                     // Laço utilizado para alterar o valor de cada elemento com dados de temperatura, para a unidade de medidas em questão
-                    for (i = 0; i < temp.length; i++) {
-                        fahrenheit = Number(temp[i].innerHTML);
-                        temp[i].innerHTML = Math.round(
-                            fahrenheitToCelsius(fahrenheit)
-                        );
-                    }
+                    tempFarenheit.forEach((element) => {
+                        element.innerHTML = Math.round(fahrenheitToCelsius(Number(element.innerHTML)));
+                    });
 
                     // Definindo o conteúdo do elemento que possui a unidade de medidas
                     current_metric = "C";
@@ -308,11 +159,8 @@ function mainCardSpawn() {
             // Atribuindo ação à ocorrência de eventos na página (listener)
             show_data.onclick = function () {
                 // Obtendo elementos da página
-                statistics_container =
-                    document.getElementsByClassName("weather-statistics");
-                statistics_table = document.getElementsByClassName(
-                    "weather-statistics-table"
-                );
+                statistics_container = document.getElementsByClassName("weather-statistics");
+                statistics_table = document.getElementsByClassName("weather-statistics-table");
                 button = document.getElementById("show-data-button-i");
                 button_class = button.className;
 
@@ -322,8 +170,7 @@ function mainCardSpawn() {
                     button.className = "fa-solid fa-chevron-up";
                     statistics_container[0].classList.add("show");
 
-                    // Criando delay para exibição do dados climáticos adicionais, utilizado para criar uma
-                    // visualização mais suave
+                    // Criando delay para exibição do dados climáticos adicionais, utilizado para criar uma visualização mais suave
                     setTimeout(function () {
                         statistics_table[0].style.display = "initial";
                     }, 300);
@@ -332,8 +179,7 @@ function mainCardSpawn() {
                     button.className = "fa-solid fa-chevron-down";
                     statistics_table[0].style.display = "none";
 
-                    // Criando delay para exibição do dados climáticos adicionais, utilizado para criar uma
-                    // visualização mais suave
+                    // Criando delay para exibição do dados climáticos adicionais, utilizado para criar uma visualização mais suave
                     setTimeout(function () {
                         statistics_container[0].classList.remove("show");
                     }, 100);
@@ -363,20 +209,6 @@ function mainCardSpawn() {
             currentTimeElementList[0].innerHTML = currentTime;
         }
 
-        // Função criada para alterar a cor do card temperatura, baseado na hora do navegador do usuário,
-        // a partir das 18h, o card passa a apresentar uma cor mais escura.
-        function setMainColor() {
-            date = new Date();
-            hour = date.getHours();
-            main_temperature = document.getElementsByClassName("main");
-            bg = "linear-gradient(#032233,#0083c97e) no-repeat";
-
-            // Verificando a hora do dia para alterar a cor do card.
-            if (hour > 17 || hour < 6) {
-                main_temperature[0].style["background"] = bg;
-            }
-        }
-
         // Essa função é utilizada para definir a rotação em graus do ícone que exibe a direção do vento
         function setWindDegrees() {
             icon_rot = document.getElementById("icon-rot");
@@ -388,15 +220,24 @@ function mainCardSpawn() {
         // Chamando as funções que devem ser executadas assim que a página é carregada, condicionadas a
         // existência do card de temperatura
         updateTime();
-        setMainColor();
         setWindDegrees();
     }
 }
 
+// Função utilizada para definir o tema inicial da página, baseado nos dados da sessão
+toggleAppTheme(true);
+
+// Função utilizada para executar o código apenas quando a página for carregada
 document.addEventListener("DOMContentLoaded", function () {
-    // Funções executadas ao abrir a página, independente do conteúdo existente
+
+    // Definindo variáveis
     let is_set = false
-    is_set = isSetDarkTheme()
-    changeTheme(is_set);
+    let themeButton = document.querySelector(`.theme-button`);
+    
+    // Adicionando um listener ao botão de tema
+    themeButton.addEventListener(`click`, () => {
+        toggleAppTheme();
+    });
+    // Chamando a função que lida com a exibição dos dados climáticos
     mainCardSpawn();
 });

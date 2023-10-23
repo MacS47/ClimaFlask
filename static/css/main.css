@@ -17,9 +17,10 @@ main{
             align-items: center;
             display: flex;
             flex-direction: row; 
+            justify-content: space-between;
             margin: 0 auto;
             padding: 1rem 2rem;
-            width: 80%;
+            width: 81%;
 
             .search-box-input{
                 background: transparent;
@@ -49,6 +50,10 @@ main{
                 text-align: right;
                 text-shadow: 0px 0px 10px rgba(255, 255, 255, 0.3);
                 width: 15%;
+                
+                &:hover{
+                    cursor: pointer;
+                }
             }
         }  
     }

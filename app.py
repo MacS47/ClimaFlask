@@ -1,12 +1,15 @@
-from flask import Flask, render_template, redirect, url_for, request, session
+# Importando bibliotecas
+from flask import Flask, render_template, redirect, url_for, request, session, jsonify
 from datetime import datetime
 from environment import TOKEN
 import requests, hashlib, bleach
 
+# Gerando chave para a sessão
 now = datetime.now()
 key = f'{now.year}{now.month}{now.day}{now.hour}{now.minute}{now.second}{now.microsecond}'
 session_key = hashlib.sha256(key.encode()).hexdigest()
 
+# Inicializando o Flask
 app = Flask(__name__)
 app.config['PERMANENT_SESSION_LIFETIME'] = 1800
 app.secret_key = session_key
@@ -16,9 +19,38 @@ def ms_to_kmh(speed_ms : float) -> float:
     speed_km : float = speed_ms * 3.6
     return speed_km
 
+# Rota com o tema da sessão
+@app.route('/theme')
+def get_theme():
+    theme = session.get('theme')
+    return jsonify(theme=theme)
+
+# Rota para alterar o tema da sessão
+@app.route('/theme/<theme>', methods=['POST'])
+def set_theme(theme):
+    if theme == 'light':
+        session['theme'] = theme
+        return jsonify(theme=session.get('theme'))
+    elif theme == 'dark':
+        session['theme'] = theme
+        return jsonify(theme=session.get('theme'))
+    else:
+        return redirect('/404');
+
+# Rota para acessar a página 404
+@app.route('/404')
+def error_404():
+    return render_template('./html/page_not_found.html')
+
 # Rota principal
 @app.route('/', methods=['GET', 'POST'])
 def index():
+
+    # Definindo valores padrões para a sessão
+    if session.get('theme') == None:
+        session['city_name'] = ''
+        session['theme'] = 'light'
+
     # Verificando se o método utilizado é POST
     if request.method == 'POST':
         # Armazenando o valor da cidade pesquisada pelo usuário
@@ -30,6 +62,7 @@ def index():
         else:
             # Se o valor não for vazio, armazena o valor da cidade na sessão e redireciona o usuário para a página de clima
             session['city_name'] = city_name
+            city_name = bleach.clean(city_name)
             return redirect( f'/weather/{city_name}' )
     else:
         # Se o método utilizado for GET, verifica se o valor da cidade está armazenado na sessão
@@ -194,5 +227,5 @@ def getapiv1(parameter):
         return "Erro! Não foi possível obter os dados. Tente novamente mais tarde."
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)
 
