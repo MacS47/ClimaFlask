@@ -227,5 +227,5 @@ def getapiv1(parameter):
         return "Erro! Não foi possível obter os dados. Tente novamente mais tarde."
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()
 
