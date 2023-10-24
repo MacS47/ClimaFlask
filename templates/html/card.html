@@ -1,7 +1,6 @@
-{% extends './html/index.html' %}{% block content %}
-<div class="card center-text no-bd" id="main">
+{% extends './html/index.html' %}{% block card %}
 
-    <div class="refresh-city-container">
+    <div class="refresh-city-container" id="card-weather">
         <div class="refresh-button-container">
             <button class="refresh-data-button" id="refresh-data-button" type="reset" title="Atualizar" onclick="toRefresh();"><i class="fa-solid fa-arrows-rotate" id="refresh-data-button-i"></i>
             </button>
@@ -52,6 +51,5 @@
             </tr>
         </table>
     </div>
-</div>
 
 {% endblock %}

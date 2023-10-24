@@ -2,8 +2,6 @@
 @import url("./variables.css");
 @import url("./header.css");
 @import url("./main.css");
-@import url("./card.css");
-@import url("./about.css");
 @import url("./footer.css");
 
 ::placeholder{
@@ -17,8 +15,15 @@ html {
     display: block;
 }
 body {
-    background: linear-gradient(#315b9f 50%, #0083c97e 100%) no-repeat;
     position: relative;
+    
+    &.light{
+        background: linear-gradient(#315b9f 50%, #0083c97e 100%) no-repeat;
+    }
+
+    &.dark{
+        background: linear-gradient(#121212 50%, #171717 100%) no-repeat;
+    }
 }
 h3 {
     margin: 0px;
@@ -34,6 +39,13 @@ td {
     text-align: justify;
 }
 
+.invisible {
+    opacity: 0;
+}
+
+.visible{
+    opacity: 1;
+}
 
 /* Classes alinhamento */
 .center-text {

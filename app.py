@@ -1,7 +1,8 @@
 # Importando bibliotecas
-from flask import Flask, render_template, redirect, url_for, request, session, jsonify
+from flask import Flask, render_template, redirect, request, session, jsonify, abort
 from datetime import datetime
 from environment import TOKEN
+from functions import ms_to_kmh
 import requests, hashlib, bleach
 
 # Gerando chave para a sessão
@@ -13,11 +14,6 @@ session_key = hashlib.sha256(key.encode()).hexdigest()
 app = Flask(__name__)
 app.config['PERMANENT_SESSION_LIFETIME'] = 1800
 app.secret_key = session_key
-
-# Função criada para converter M/s para Km/h
-def ms_to_kmh(speed_ms : float) -> float:
-    speed_km : float = speed_ms * 3.6
-    return speed_km
 
 # Rota com o tema da sessão
 @app.route('/theme')
@@ -38,9 +34,45 @@ def set_theme(theme):
         return redirect('/404');
 
 # Rota para acessar a página 404
-@app.route('/404')
-def error_404():
-    return render_template('./html/page_not_found.html')
+@app.errorhandler(400)
+def not_found(error):
+    city_name = session.get('city_name', '')
+    city_name = bleach.clean(city_name)
+    return render_template('./html/bad_request.html', city_name=city_name)
+
+# Rota para acessar a página 404
+@app.errorhandler(404)
+def not_found(error):
+    city_name = session.get('city_name', '')
+    city_name = bleach.clean(city_name)
+    return render_template('./html/page_not_found.html', city_name=city_name)
+
+# Rota para acessar a página 405
+@app.errorhandler(405)
+def not_found(error):
+    city_name = session.get('city_name', '')
+    city_name = bleach.clean(city_name)
+    return render_template('./html/method_not_allowed.html', city_name=city_name)
+
+# Rota para acessar a página 500
+@app.errorhandler(500)
+def not_found(error):
+    city_name = session.get('city_name', '')
+    city_name = bleach.clean(city_name)
+    return render_template('./html/internal_server_error.html', city_name=city_name)
+
+# Rota para simular um erro
+@app.route('/error/<parameter>')
+def error(parameter):
+    if parameter.isnumeric():
+        abort(int(parameter))
+    elif parameter == 'home':
+        return redirect('/')
+    elif parameter == 'about':
+        return redirect('/about')
+    else:
+        abort(400)
+
 
 # Rota principal
 @app.route('/', methods=['GET', 'POST'])
@@ -157,45 +189,33 @@ def weather_city(parameter):
         cloudness    = clouds.get('all')
         sunrise      = sunrise_time
         sunset       = sunset_time
+
+        # Retornando a página index.html e as variáveis que serão utilizadas
+        return render_template('./html/card.html',
+                            city         = city,
+                            country      = country,
+                            temp         = temp,
+                            temp_min     = temp_min,
+                            temp_max     = temp_max,
+                            description  = description, 
+                            feels_like   = feels_like, 
+                            humidity     = humidity, 
+                            current_time = current_time, 
+                            pressure     = pressure,
+                            visibility   = visibility,
+                            speed        = speed,
+                            cloudness    = cloudness,
+                            deg          = deg,
+                            sunrise      = sunrise,
+                            sunset       = sunset,
+                            city_name    = parameter)
     else:
         # Caso o código de retorno ao chamar a API não seja 200
         # as variáveis receberão o valor N/A
-        city         = 'N/A'
-        country      = 'N/A'
-        temp         = 'N/A'
-        temp_min     = 'N/A'
-        temp_max     = 'N/A'
-        feels_like   = 'N/A'
-        description  = 'N/A'
-        humidity     = 'N/A'
-        pressure     = 'N/A'
-        visibility   = 'N/A'
-        speed        = 'N/A'
-        deg          = 'N/A'
-        cloudness    = 'N/A'
-        sunrise      = 'N/A'
-        sunset       = 'N/A'
-        current_time = 'N/A'
+        city         = city
 
-    # Retornando a página index.html e as variáveis que serão utilizadas
-    return render_template('./html/card.html',
-                           city         = city,
-                           country      = country,
-                           temp         = temp,
-                           temp_min     = temp_min,
-                           temp_max     = temp_max,
-                           description  = description, 
-                           feels_like   = feels_like, 
-                           humidity     = humidity, 
-                           current_time = current_time, 
-                           pressure     = pressure,
-                           visibility   = visibility,
-                           speed        = speed,
-                           cloudness    = cloudness,
-                           deg          = deg,
-                           sunrise      = sunrise,
-                           sunset       = sunset,
-                           city_name    = parameter)
+        return render_template('./html/incorrect_input.html', city_name=city_name)
+
 
 # Rota para acessar a API
 @app.route('/api/v1/<parameter>', methods=['GET'])

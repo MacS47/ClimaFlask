@@ -35,7 +35,7 @@ async function toggleAppTheme(onStart = false) {
     let bkgDark = "#121212";
     let bkgLight = "linear-gradient(#315b9f 50%, #0083c97e 100%)";
     let icon_theme = document.getElementById("theme-button-icon");
-    let body_color = document.getElementsByTagName("body");
+    let body = document.querySelector("body");
 
 
     // Verificando se é a primeira vez que a função é executada
@@ -50,7 +50,9 @@ async function toggleAppTheme(onStart = false) {
             icon_theme.classList.add("fa-sun");
 
             // Alterando a flag de controle de tema na sessão
-            body_color[0].style["background"] = bkgDark;
+            // body.style["background"] = bkgDark;
+            body.classList.remove("light");
+            body.classList.add("dark");
 
         }
         else{
@@ -60,7 +62,11 @@ async function toggleAppTheme(onStart = false) {
             icon_theme.classList.add("fa-moon");
 
             // Alterando a flag de controle de tema na sessão
-            body_color[0].style["background"] = bkgLight;
+            // body.style["background"] = bkgLight;
+            body.classList.remove("dark");
+            body.classList.add("light");
+
+
             
         }
 
@@ -74,7 +80,10 @@ async function toggleAppTheme(onStart = false) {
             icon_theme.classList.add("fa-sun");
 
             // Alterando a cor do plano de fundo para o tema escuro
-            body_color[0].style["background"] = bkgDark;
+            // body.style["background"] = bkgDark;
+            body.classList.remove("light");
+            body.classList.add("dark");
+
 
             // Alterando a flag de controle de tema na sessão
             setSessionTheme('dark');
@@ -86,7 +95,11 @@ async function toggleAppTheme(onStart = false) {
             icon_theme.classList.add("fa-moon");
 
             // Alterando a cor do plano de fundo para o tema claro
-            body_color[0].style["background"] = bkgLight;
+            // body.style["background"] = bkgLight;
+            body.classList.remove("dark");
+            body.classList.add("light");
+
+
             
             // Alterando a flag de controle de tema na sessão
             setSessionTheme('light');
@@ -101,7 +114,7 @@ function mainCardSpawn() {
     const toggle_metrics = document.getElementById("toggle-metrics");
     const refresh_data = document.getElementById("refresh-data-button");
     const show_data = document.getElementById("show-data-button");
-    const main = document.getElementById("main");
+    const main = document.getElementById("card-weather");
 
     // Condicionando a execução do código à existência do card de temperatura
     // para evitar erros ao carregar a página
@@ -199,21 +212,22 @@ function mainCardSpawn() {
         // Função responsável por atualizar a data de refresh no card de temperatura
         // Para o horário do navegador do usuário, devido a divergências de fuso-horários
         function updateTime() {
-            date = new Date();
-            currentTime = date.toLocaleTimeString([], {
+            let date = new Date();
+            let currentTime = date.toLocaleTimeString([], {
                 hour: "2-digit",
                 minute: "2-digit",
             });
-            currentTimeElementList =
-                document.getElementsByClassName("current-time");
-            currentTimeElementList[0].innerHTML = currentTime;
+            let currentTimeElementList = document.getElementsByClassName("current-time");
+            if(currentTimeElementList){
+                currentTimeElementList[0].innerHTML = currentTime;
+            };
         }
 
         // Essa função é utilizada para definir a rotação em graus do ícone que exibe a direção do vento
         function setWindDegrees() {
-            icon_rot = document.getElementById("icon-rot");
-            wind_deg = Number(document.getElementById("wind-deg").innerHTML);
-            wind = wind_deg + 135 + "deg";
+            let icon_rot = document.getElementById("icon-rot");
+            let wind_deg = Number(document.getElementById("wind-deg").innerHTML);
+            let wind = wind_deg + 135 + "deg";
             icon_rot.style["rotate"] = wind;
         }
 
@@ -226,6 +240,18 @@ function mainCardSpawn() {
 
 // Função utilizada para definir o tema inicial da página, baseado nos dados da sessão
 toggleAppTheme(true);
+
+function handleTransition(){
+
+    let invisibleElements = document.getElementsByClassName("invisible");
+    invisibleElements = Array.from(invisibleElements);
+
+    invisibleElements.forEach(element => {
+        element.classList.remove("invisible");
+        element.classList.add("visible");
+    });
+}
+
 
 // Função utilizada para executar o código apenas quando a página for carregada
 document.addEventListener("DOMContentLoaded", function () {
@@ -240,4 +266,5 @@ document.addEventListener("DOMContentLoaded", function () {
     });
     // Chamando a função que lida com a exibição dos dados climáticos
     mainCardSpawn();
+    handleTransition();
 });

@@ -27,7 +27,7 @@
 
         <title>Clima {{city}}</title>
     </head>
-    <body>
+    <body class="">
         <header id="header">
             <div class="menu-container ">
                 <a
@@ -74,7 +74,28 @@
                     </button>
                 </form>
             </div>
-            {% block content %} {% endblock %}
+            
+            <div class="card center-text invisible" id="main">
+                {% block card %}
+
+                <div class="card-container">
+                    <div class="card-container-title">
+                        <h1 class="card-title">Como utilizar?</h1>
+                    </div>
+                    <div class="card-container-paragraph">
+                        <p class="card-paragraph">
+                            Para saber o clima no local em que você está, basta informar nome da sua cidade na caixa de pesquisa acima. ⬆️
+                        </p>
+                        <br>
+                        <p class="card-paragraph">
+                            Por exemplo, se você mora em São Paulo, basta digitar <strong>São Paulo</strong> e clicar no botão de pesquisa.
+                        </p>
+                    </div>
+                </div>
+
+                {% endblock %}
+            </div>
+
         </main>
         <footer id="footer">
             <div class="footer-container no-bd">
