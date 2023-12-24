@@ -1,55 +1,85 @@
 {% extends './html/index.html' %}{% block card %}
 
-    <div class="refresh-city-container" id="card-weather">
-        <div class="refresh-button-container">
-            <button class="refresh-data-button" id="refresh-data-button" type="reset" title="Atualizar" onclick="toRefresh();"><i class="fa-solid fa-arrows-rotate" id="refresh-data-button-i"></i>
-            </button>
-        </div>
-        <div class="line-text city-line">
-            <h3>{{city}}, {{country}}</h3>
-        </div>
-    </div>
+<div class="refresh-city-container" id="card-weather">
+  <div class="refresh-button-container">
+    <button
+      class="refresh-data-button"
+      id="refresh-data-button"
+      type="reset"
+      title="Atualizar"
+      onclick="toRefresh();"
+    >
+      <i class="fa-solid fa-arrows-rotate" id="refresh-data-button-i"></i>
+    </button>
+  </div>
+  <div class="line-text city-line">
+    <h3>{{city}}, {{country}}</h3>
+  </div>
+</div>
 
-    <div class="temperature ">
-        <p class="temperature-value"><a class="temp">{{temp}}</a>°</p>
-        <div class="temperature-metrics">
-            <p class="current-temperature-metrics">C</p>
-            <p><button class="toggle-temperature-metrics" id="toggle-metrics" type="reset" title="Alterar unidade de medidas" onclick="toFahrenheit();">F</button></p>
-        </div>
-    </div>
-    <div class="line-text weather-description">
-        <h3>{{description}}</h3>
-    </div>
-    <div class="line-text updated-timestamp">
-        <p class="last-update">Atualizado <a class="current-time">{{current_time}}</a></p>
-        <div class="showtable-button-container">
-            <button class="show-data-button" id="show-data-button" type="reset"  title="Exibir estatísticas" onclick="toShowStatistics();"><i class="fa-solid fa-chevron-down" id="show-data-button-i"></i>
-            </button>
-        </div>
-    </div>
-    <div class="weather-statistics">
-        <table class="weather-statistics-table">
-            <tr class="">
-                <td class="">Temp. Máxima: <a class="temp">{{temp_max}}</a>°</td>
-                <td class="">Temp. Mínima: <a class="temp">{{temp_min}}</a>°</td>
-            </tr>
-            <tr class="">
-                <td class="">Sensação térmica: <a class="temp">{{feels_like}}</a>°</td>
-                <td class="">Umidade: {{humidity}}%</td>
-            </tr>
-            <tr class="">
-                <td class="">Vento:<a> </a> <i class="fa-solid fa-location-arrow" id="icon-rot"></i> {{speed}} Km/h <a id="wind-deg">{{deg}}</a></td>
-                <td class="">Nebulosidade {{cloudness}}%</td>
-            </tr>
-            <tr class="">
-                <td class="" title="">Visibilidade: {{visibility}} Km</td>
-                <td class="" title="">Barômetro: {{pressure}} hPa</td>
-            </tr>
-            <tr>
-                <td class="">Nascer do Sol: {{sunrise}}</td>
-                <td class="">Por do Sol: {{sunset}}</td>
-            </tr>
-        </table>
-    </div>
+<div class="temperature">
+  <p class="temperature-value"><a class="temp">{{temp}}</a>°</p>
+  <div class="temperature-metrics">
+    <p class="current-temperature-metrics">C</p>
+    <p>
+      <button
+        class="toggle-temperature-metrics"
+        id="toggle-metrics"
+        type="reset"
+        title="Alterar unidade de medidas"
+        onclick="toFahrenheit();"
+      >
+        F
+      </button>
+    </p>
+  </div>
+</div>
+<div class="line-text weather-description">
+  <h3>{{description}}</h3>
+</div>
+<div class="line-text updated-timestamp">
+  <p class="last-update">
+    Atualizado <a class="current-time">{{current_time}}</a>
+  </p>
+  <div class="showtable-button-container">
+    <button
+      class="show-data-button"
+      id="show-data-button"
+      type="reset"
+      title="Exibir estatísticas"
+      onclick="toShowStatistics();"
+    >
+      <i class="fa-solid fa-chevron-down" id="show-data-button-i"></i>
+    </button>
+  </div>
+</div>
+<div class="weather-statistics">
+  <table class="weather-statistics-table">
+    <tr class="">
+      <td class="">Temp. Máxima: <a class="temp">{{temp_max}}</a>°</td>
+      <td class="">Temp. Mínima: <a class="temp">{{temp_min}}</a>°</td>
+    </tr>
+    <tr class="">
+      <td class="">Sensação térmica: <a class="temp">{{feels_like}}</a>°</td>
+      <td class="">Umidade: {{humidity}}%</td>
+    </tr>
+    <tr class="">
+      <td class="">
+        Vento:<a> </a>
+        <i class="fa-solid fa-location-arrow" id="icon-rot"></i> {{speed}} Km/h
+        <a id="wind-deg">{{deg}}</a>
+      </td>
+      <td class="">Nebulosidade {{cloudness}}%</td>
+    </tr>
+    <tr class="">
+      <td class="" title="">Visibilidade: {{visibility}} Km</td>
+      <td class="" title="">Barômetro: {{pressure}} hPa</td>
+    </tr>
+    <tr>
+      <td class="">Nascer do Sol: {{sunrise}}</td>
+      <td class="">Por do Sol: {{sunset}}</td>
+    </tr>
+  </table>
+</div>
 
 {% endblock %}

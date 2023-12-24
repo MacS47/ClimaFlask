@@ -3,66 +3,67 @@
 @import url("./about.css");
 @import url("./error.css");
 
-main{
-    min-height: 80vh;
-    margin-bottom: 10rem;
-    
-    .search-box-container {
-        background: rgba(255, 255, 255, 0.1);
-        border-radius: 1rem;
-        display: flex;
-        justify-content: space-between;
-        margin: 1.5rem auto;
-        outline: 1px solid rgba(255,255,255,0.3);
-        width: 24rem;
-        
-        .search-box-form {
-            align-items: center;
-            display: flex;
-            flex-direction: row; 
-            justify-content: space-between;
-            margin: 0 auto;
-            padding: 1rem 2rem;
-            width: 81%;
+main {
+  min-height: 80vh;
+  margin-bottom: 10rem;
 
-            .search-box-input{
-                background: transparent;
-                border: none;
-                color: var(--white);
-                font-family: var(--font-family-main);
-                font-size: var(--font-size-base);
-                text-shadow: 0px 0px 10px rgba(255, 255, 255, 0.3);
-                width: 80%;
-                
-                &::placeholder{
-                    color: var(--white);
-                }
+  .search-box-container {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 1rem;
+    display: flex;
+    justify-content: space-between;
+    margin: 1.5rem auto;
+    outline: 1px solid rgba(255, 255, 255, 0.3);
+    width: 24rem;
 
-                &:focus{
-                    outline: 1px solid transparent;
-                }
-            }
+    .search-box-form {
+      align-items: center;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      margin: 0 auto;
+      padding: 1rem 2rem;
+      width: 81%;
 
-            .search-box-button {
-                border: hidden;
-                background-color: transparent;
-                color: var(--white);
-                display: inline-block;
-                font-size: larger;
-                padding-left: 10px;
-                text-align: right;
-                text-shadow: 0px 0px 10px rgba(255, 255, 255, 0.3);
-                width: 15%;
-                
-                &:hover{
-                    cursor: pointer;
-                }
-            }
-        }  
-    }
-    @media screen and (max-width: 768px) {
-        .search-box-container {
-            width: 100%;
+      .search-box-input {
+        background: transparent;
+        border: none;
+        color: var(--white);
+        font-family: var(--font-family-main);
+        font-size: var(--font-size-base);
+        text-shadow: 0px 0px 10px rgba(255, 255, 255, 0.3);
+        width: 80%;
+
+        &::placeholder {
+          color: var(--white);
         }
+
+        &:focus {
+          outline: 1px solid transparent;
+        }
+      }
+
+      .search-box-button {
+        border: hidden;
+        background-color: transparent;
+        color: var(--white);
+        display: inline-block;
+        font-size: larger;
+        padding-left: 10px;
+        text-align: right;
+        text-shadow: 0px 0px 10px rgba(255, 255, 255, 0.3);
+        width: 15%;
+
+        &:hover {
+          cursor: pointer;
+        }
+      }
     }
+  }
+
+  @media screen and (max-width: 768px) {
+    .search-box-container {
+      width: 100%;
+    }
+  }
 }

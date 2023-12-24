@@ -1,22 +1,22 @@
 @import url(./fonts.css);
 
 /* Variáveis */
-:root{
-    --placeholder-color: #757575;
-    --font-family-main: 'Nunito', sans-serif;
+:root {
+  --placeholder-color: #757575;
+  --font-family-main: 'Nunito', sans-serif;
 
 
-    /* Tamanhos de fontes */
-    --font-size-small: 0.5rem;
-    --font-size-base: 1rem;
-    --font-size-base-plus: 1.3rem;
-    --font-size-medium: 1.5rem;
-    --font-size-big: 2rem;
+  /* Tamanhos de fontes */
+  --font-size-small: 0.5rem;
+  --font-size-base: 1rem;
+  --font-size-base-plus: 1.3rem;
+  --font-size-medium: 1.5rem;
+  --font-size-big: 2rem;
 
 
-    /* Cores */
-    --black: #000000;
-    --white: #ffffff;
+  /* Cores */
+  --black: #000000;
+  --white: #ffffff;
 
-    --white-warm: #e6e2d3;
+  --white-warm: #e6e2d3;
 }

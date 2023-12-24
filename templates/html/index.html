@@ -1,107 +1,106 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link
-            rel="shortcut icon"
-            href="{{url_for('static',filename='./images/favicon.png')}}"
-            type="image/x-icon"
-        />
-        <link
-            rel="stylesheet"
-            href="{{url_for('static',filename='./css/style.css')}}"
-        />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link
-            href="https://fonts.googleapis.com/css2?family=Sora:wght@100;200;300;400;500;600;700;800&display=swap"
-            rel="stylesheet"
-        />
-        <script
-            src="https://kit.fontawesome.com/7a5cc2f48d.js"
-            crossorigin="anonymous"
-        ></script>
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="shortcut icon"
+      href="{{url_for('static',filename='./images/favicon.png')}}"
+      type="image/x-icon"
+    />
+    <link
+      rel="stylesheet"
+      href="{{url_for('static',filename='./css/style.css')}}"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Sora:wght@100;200;300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      src="https://kit.fontawesome.com/7a5cc2f48d.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-        <title>Clima {{city}}</title>
-    </head>
-    <body class="">
-        <header id="header">
-            <div class="menu-container ">
-                <a
-                    class="menu-item home-button menu-button"
-                    title="Ir para Início"
-                    href="home"
-                    >Início</a
-                >
-                <a
-                    class="menu-item about-button menu-button"
-                    title="Ir para Sobre"
-                    href="about"
-                    >Sobre</a
-                >
-            </div>
-            <button
-                class="theme-button menu-button"
-                title="Alterar tema"
-                type="button"
-                onclick="toggleAppTheme();"
-                id="theme-button"
-            >
-            <i id="theme-button-icon" class="fa-regular fa-moon"></i>
-            </button>
+    <title>Clima {{city}}</title>
+  </head>
+  <body class="">
+    <header id="header">
+      <div class="menu-container">
+        <a
+          class="menu-item home-button menu-button"
+          title="Ir para Início"
+          href="home"
+          >Início</a
+        >
+        <a
+          class="menu-item about-button menu-button"
+          title="Ir para Sobre"
+          href="about"
+          >Sobre</a
+        >
+      </div>
+      <button
+        class="theme-button menu-button"
+        title="Alterar tema"
+        type="button"
+        onclick="toggleAppTheme();"
+        id="theme-button"
+      >
+        <i id="theme-button-icon" class="fa-regular fa-moon"></i>
+      </button>
+    </header>
+    <main>
+      <div class="search-box-container center-text">
+        <form class="search-box-form" action="/" method="POST">
+          <input
+            class="search-box-input"
+            type="text"
+            name="city_name"
+            id="city_name"
+            placeholder="Informe a cidade..."
+            value="{{city_name}}"
+          />
+          <button class="search-box-button" type="submit" title="city_name">
+            <i id="search-button-icon" class="fa-solid fa-magnifying-glass"></i>
+          </button>
+        </form>
+      </div>
 
-        </header>
-        <main>
-            <div class="search-box-container center-text">
-                <form class="search-box-form" action="/" method="POST">
-                    <input
-                        class="search-box-input"
-                        type="text"
-                        name="city_name"
-                        id="city_name"
-                        placeholder="Informe a cidade..."
-                        value="{{city_name}}"
-                    />
-                    <button
-                        class="search-box-button"
-                        type="submit"
-                        title="city_name"
-                    >
-                        <i id="search-button-icon" class="fa-solid fa-magnifying-glass"></i>
-                    </button>
-                </form>
-            </div>
-            
-            <div class="card center-text invisible" id="main">
-                {% block card %}
+      <div class="card center-text invisible" id="main">
+        {% block card %}
 
-                <div class="card-container">
-                    <div class="card-container-title">
-                        <h1 class="card-title">Como utilizar?</h1>
-                    </div>
-                    <div class="card-container-paragraph">
-                        <p class="card-paragraph">
-                            Para saber o clima no local em que você está, basta informar nome da sua cidade na caixa de pesquisa acima. ⬆️
-                        </p>
-                        <br>
-                        <p class="card-paragraph">
-                            Por exemplo, se você mora em São Paulo, basta digitar <strong>São Paulo</strong> e clicar no botão de pesquisa.
-                        </p>
-                    </div>
-                </div>
+        <div class="card-container">
+          <div class="card-container-title">
+            <h1 class="card-title">Como utilizar?</h1>
+          </div>
+          <div class="card-container-paragraph">
+            <p class="card-paragraph">
+              Para saber o clima em um determinado local, basta informar nome da
+              cidade desejada, na caixa de pesquisa acima. ⬆️
+            </p>
+            <br />
+            <p class="card-paragraph">
+              Por exemplo, se você mora em São Paulo, basta digitar
+              <strong>São Paulo</strong> e clicar no botão de pesquisa.
+            </p>
+          </div>
+        </div>
 
-                {% endblock %}
-            </div>
-
-        </main>
-        <footer id="footer">
-            <div class="footer-container no-bd">
-                <p>2023 - <a href="https://github.com/MacS47">MacS47</a></p>
-            </div>
-        </footer>
-        <script src="{{url_for('static', filename = './js/index.js')}}"></script>
-    </body>
+        {% endblock %}
+      </div>
+    </main>
+    <footer id="footer">
+      <div class="footer-container no-bd">
+        <p>
+          <span class="footer-year"></span> -
+          <a href="https://github.com/MacS47">MacS47</a>
+        </p>
+      </div>
+    </footer>
+    <script src="{{url_for('static', filename = './js/index.js')}}"></script>
+  </body>
 </html>

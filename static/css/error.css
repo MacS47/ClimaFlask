@@ -1,30 +1,33 @@
 @import url('./variables.css');
 
 .error-container-title {
-    padding: 2rem;
-    padding-bottom: 0%;
-    text-align: left;
+  padding: 2rem;
+  padding-bottom: 0%;
+  text-align: left;
 }
+
 .error-container-paragraph {
-    line-height: 1.6;
-    padding: 2rem;
-    text-align: left;
+  line-height: 1.6;
+  padding: 2rem;
+  text-align: left;
 }
+
 .error-container-paragraph a,
 .error-container-paragraph a:active,
 .error-container-paragraph a:visited,
-.error-container-paragraph a:hover{
-    color: var(--white);
-    font-weight: 800;
-    text-decoration: none;
+.error-container-paragraph a:hover {
+  color: var(--white);
+  font-weight: 800;
+  text-decoration: none;
 }
+
 .error-title,
 .error-paragraph {
-    margin: 0;
+  margin: 0;
 }
 
 @media screen and (max-width: 768px) {
-    .error-container {
-        width: 100%;
-    }
+  .error-container {
+    width: 100%;
+  }
 }
