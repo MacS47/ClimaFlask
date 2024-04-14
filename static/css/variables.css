@@ -3,7 +3,7 @@
 /* Variáveis */
 :root {
   --placeholder-color: #757575;
-  --font-family-main: 'Nunito', sans-serif;
+  --font-family-main: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 
 
   /* Tamanhos de fontes */
@@ -17,6 +17,7 @@
   /* Cores */
   --black: #000000;
   --white: #ffffff;
+  --gray: #808080;
 
   --white-warm: #e6e2d3;
 }

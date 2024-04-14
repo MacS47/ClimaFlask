@@ -232,6 +232,11 @@ function mainCardSpawn() {
   }
 }
 
+// Função utilizada para definir o foco no campo de busca, quando a página é carregada
+function setFocus() {
+  document.querySelector(`.search-box-input`).focus();
+}
+
 // Função utilizada para definir o tema inicial da página, baseado nos dados da sessão
 toggleAppTheme(true);
 
@@ -265,4 +270,5 @@ document.addEventListener("DOMContentLoaded", function () {
   mainCardSpawn();
   handleTransition();
   handleFooterYear();
+  setFocus();
 });

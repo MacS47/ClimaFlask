@@ -42,21 +42,21 @@ def not_found(error):
 
 # Rota para acessar a página 404
 @app.errorhandler(404)
-def not_found(error):
+def not_found_404(error):
     city_name = session.get('city_name', '')
     city_name = bleach.clean(city_name)
     return render_template('./html/page_not_found.html', city_name=city_name)
 
 # Rota para acessar a página 405
 @app.errorhandler(405)
-def not_found(error):
-    city_name = session.get('city_name', '')
-    city_name = bleach.clean(city_name)
-    return render_template('./html/method_not_allowed.html', city_name=city_name)
+def not_found_405(error):
+  city_name = session.get('city_name', '')
+  city_name = bleach.clean(city_name)
+  return render_template('./html/method_not_allowed.html', city_name=city_name)
 
 # Rota para acessar a página 500
 @app.errorhandler(500)
-def not_found(error):
+def not_found_500(error):
     city_name = session.get('city_name', '')
     city_name = bleach.clean(city_name)
     return render_template('./html/internal_server_error.html', city_name=city_name)
@@ -248,4 +248,5 @@ def getapiv1(parameter):
 
 if __name__ == '__main__':
     app.run()
+    
 
