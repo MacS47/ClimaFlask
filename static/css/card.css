@@ -15,8 +15,8 @@
   outline: 1px solid rgba(255, 255, 255, 0.3);
   padding: 1rem 0px;
   transition: all 0.5s ease;
-  min-width: 90%;
-  max-width: calc(1368px - 20%);
+  max-width: 24rem;
+
 
   .card-container-title {
     padding: 2rem;
@@ -122,5 +122,6 @@
 @media screen and (max-width: 768px) {
   .card {
     width: 100%;
+
   }
 }
