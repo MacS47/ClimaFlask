@@ -31,9 +31,9 @@ def set_theme(theme):
         session['theme'] = theme
         return jsonify(theme=session.get('theme'))
     else:
-        return redirect('/404');
+        return redirect('/404')
 
-# Rota para acessar a página 404
+# Rota para acessar a página 400
 @app.errorhandler(400)
 def not_found(error):
     city_name = session.get('city_name', '')
@@ -130,6 +130,17 @@ def about():
 @app.route('/home')
 def home():
     return redirect('/')
+
+
+# Rota para acessar a página de Privacidade
+@app.route('/privacy')
+def privacy():
+    city_name = session.get('city_name', '')
+    city_name = bleach.clean(city_name)
+    if city_name == '':
+        return render_template('./html/privacy.html')
+    else:
+        return render_template('/html/privacy.html', city_name=city_name)
 
 # Rota utilizada para exibir os dados climáticos ao usuário
 @app.route('/weather/<parameter>')
@@ -248,5 +259,7 @@ def getapiv1(parameter):
 
 if __name__ == '__main__':
     app.run()
+    # Executando o Flask em modo de depuração na porta 5000
+    # app.run(debug=True, port=5000)
     
 

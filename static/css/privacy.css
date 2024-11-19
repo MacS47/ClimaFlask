@@ -1,0 +1,33 @@
+@import url('./variables.css');
+
+.privacy-container-title {
+  padding: 2rem;
+  padding-bottom: 0%;
+  text-align: left;
+}
+
+.privacy-container-paragraph {
+  line-height: 1.6;
+  padding: 0.8rem 2rem;
+  text-align: left;
+}
+
+.privacy-container-paragraph a,
+.privacy-container-paragraph a:active,
+.privacy-container-paragraph a:visited,
+.privacy-container-paragraph a:hover {
+  color: var(--white);
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.privacy-title,
+.privacy-paragraph {
+  margin: 0;
+}
+
+@media screen and (max-width: 768px) {
+  .privacy-container {
+    width: 100%;
+  }
+}

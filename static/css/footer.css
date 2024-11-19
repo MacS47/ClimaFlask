@@ -1,5 +1,6 @@
 #footer {
   background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
   border-radius: 1rem;
   bottom: 8px;
   outline: 1px solid rgba(255, 255, 255, 0.3);
